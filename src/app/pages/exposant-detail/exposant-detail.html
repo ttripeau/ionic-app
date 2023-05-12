@@ -1,0 +1,399 @@
+<app-return-header
+  colorBtn="light"
+  text="{{ 'global.back' | translate }}"
+  [defaultHref]="(defaultHref !== '') ? defaultHref : '/app/tabs/exposants'"
+>
+</app-return-header>
+
+<ion-content id="exposant-detail">
+  <!--    <img class="logoHeader" [src]="templateConfig?.logoHeaderBg" />-->
+
+  <div class="about-header-text exposant-detail__header">
+    <div class="exposant-detail__header__inner" *ngIf="exposant">
+      <ion-avatar class="exposant-detail__header__inner__avatar speaker-background">
+        <img
+          onerror="this.src='assets/img/default-imgs/default-speaker.jpg'; this.style.borderRadius='50%';"
+          class="exposant-detail__header__inner__avatar__img"
+          [src]="exposant.logo"
+        />
+      </ion-avatar>
+      <h2 class="societeName">{{exposant.name}}</h2>
+    </div>
+  </div>
+
+  <div class="about-header">
+    <ion-row class="ion-padding-top">
+      <ion-col *ngIf="exposant?.boothNumber" class="ion-padding-top">
+        <i>{{ 'exhibitors.find-us-at-stand' | translate }} {{ exposant.boothNumber }}</i>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-row class="ion-no-padding">
+    <ion-col size="12" class="ion-padding">
+      <app-horizontal-button
+        *ngIf="exposant && !!exposant?.idSponsor === !!exposant?.idSponsorTraining"
+        [icon]="{name: 'map-outline'}"
+        title="{{ 'exhibitors.locate.title' | translate }}"
+        text="{{ 'exhibitors.locate.content' | translate }} {{exposant.name}}"
+        colorTitle="congress"
+        (clicked)="openInteractiveMap()"
+      >
+      </app-horizontal-button>
+    </ion-col>
+  </ion-row>
+
+  <div class="about-header">
+    <div class="toolbarFilters">
+      <!-- <ion-row class="ion-padding ion-no-padding-top">
+        <ion-col [size]="12" class="ion-no-padding"> -->
+      <!-- <ion-button
+            [color]="templateConfig?.buttonBgColor"
+            expand="block"
+            class="ion-text-uppercase"
+            [routerLink]="['/interactive-map']"
+            [queryParams]="{ polygonId: exposant?.id, routeBack: '/app/tabs/exposants/exposant-details/' + exposant?.id }"
+            routerLinkActive="active"
+            routerDirection="root"
+          > -->
+      <!-- <ion-button [color]="templateConfig?.buttonBgColor" expand="block" class="ion-text-uppercase" (click)="openInteractiveMap()">
+            <ion-icon [color]="templateConfig?.buttonTxtColor" name="map-outline" slot="start"></ion-icon>
+            <ion-label [color]="templateConfig?.buttonTxtColor"> {{ 'global.open-maps' | translate }} </ion-label>
+          </ion-button>
+        </ion-col> -->
+      <!-- <ion-col *ngIf="true || exposant?.idSponsor" size="10" offset="1">
+          <ion-button fill="clear" expand="block" [color]="templateConfig?.buttonBgColor" class="ion-text-uppercase" (click)="showSessions()">
+            <ion-label [color]="'light'"> {{ 'exhibitors.symposia.scientific' | translate }} </ion-label>
+            <ion-icon [color]="'light'" slot="end" name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-col> -->
+      <!-- <ion-col *ngIf="true || exposant?.idSponsor" size="10" offset="1">
+          <ion-button
+            fill="clear"
+            expand="block"
+            [color]="templateConfig?.buttonBgColor"
+            class="ion-text-uppercase ion-no-padding"
+            (click)="showTrainingSessions()"
+          >
+            <ion-label [color]="'light'"> {{ 'exhibitors.symposia.training' | translate }} </ion-label>
+            <ion-icon [color]="'light'" slot="end" name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-col> -->
+      <!-- <ion-col size="6" offset="3">
+          <ion-button [color]="templateConfig?.buttonBgColor" (click)="openModal()" expand="block" class="ion-text-uppercase">
+            <ion-icon [color]="templateConfig?.buttonTxtColor" name="map" slot="start"></ion-icon>
+            {{ 'global.open-maps' | translate }}
+          </ion-button>
+        </ion-col> -->
+      <!-- <ion-col size="6">
+          <ion-button [color]="templateConfig?.buttonBgColor" routerLink="/app/tabs/produits" routerLinkActive="active" routerDirection="root" expand="block" class="ion-text-uppercase">
+            <ion-icon [color]="templateConfig?.buttonTxtColor" name="reader" slot="start"></ion-icon>
+            {{ 'tabs.produits' | translate }}
+          </ion-button>
+        </ion-col> -->
+      <!-- </ion-row> -->
+
+      <ion-row class="ion-padding-bottom">
+        <ion-col
+          *ngIf="(!!exposant?.idSponsor ?? -1)  !== (!!exposant?.idSponsorTraining ?? -2)"
+          class="ion-no-padding"
+          size="5.25"
+          offset="0.5"
+        >
+          <app-vertical-button
+            (clicked)="openInteractiveMap()"
+            [icon]="{name: 'map-outline'}"
+            title="{{ 'exhibitors.locate.title' | translate }}"
+            text="{{ 'exhibitors.locate.content' | translate }} {{exposant.name}}"
+            className="light"
+          >
+          </app-vertical-button>
+        </ion-col>
+        <ion-col *ngIf="exposant?.idSponsor" class="ion-no-padding" size="5.25" offset="0.5">
+          <app-vertical-button
+            (clicked)="showSessions()"
+            [icon]="{name: 'calendar-outline'}"
+            title="{{ 'exhibitors.sessions.title' | translate }}"
+            text="{{ 'exhibitors.sessions.content' | translate }} {{exposant.name}}"
+            className="light"
+          >
+          </app-vertical-button>
+        </ion-col>
+
+        <ion-col *ngIf="exposant?.idSponsorTraining" class="ion-no-padding" size="5.25" offset="0.5">
+          <app-vertical-button
+            className="s2"
+            (clicked)="showTrainingSessions()"
+            [icon]="{src: 'assets/icon/calendar-pen-outline.svg'}"
+            title="{{ 'exhibitors.training-sessions.title' | translate }}"
+            text="{{ 'exhibitors.training-sessions.content' | translate }} {{exposant.name}}"
+            className="light"
+          >
+          </app-vertical-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <ion-grid class="ion-no-padding bottomSpacesGrid">
+    <!-- <ion-row *ngIf="exposant?.numeroStand" class="grid-no-padding-background ion-padding ion-no-padding-bottom">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'exhibitors.infos.title' |translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <app-contact-detail
+                  [details]="[{
+                    show: exposant?.numeroStand,
+                    detail: 'Stand '+exposant?.numeroStand,
+                    icon: 'locate-outline',
+                    color: 'congressultralight'
+                  }]"
+                >
+                </app-contact-detail>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-row>
+              <ion-col class="titleColors ion-no-padding-top" size="6">
+                <h2>{{ 'notes.title' | translate }}</h2>
+              </ion-col>
+
+              <ion-col size="6" class="ion-text-right ion-align-self-center">
+                <app-small-button
+                  (clicked)="addNote()"
+                  [icon]="{name: 'pencil-outline'}"
+                  text="{{ note === null ? ('notes.add_note' | translate) : ('notes.edit_note' | translate) }}"
+                  [color]="'congressultralightoutline'"
+                >
+                </app-small-button>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin infosG" (click)="addNote()">
+              <div
+                class="ion-padding note-value"
+                *ngIf="note !== null && note.value.length > 0 && note.value !== '\n'"
+                [innerHTML]="note.value"
+              >
+              </div>
+              <div *ngIf="note === null || note.value === '' || note.value === '\n'" class="ion-padding not-found">
+                {{ 'notes.not_found' | translate }}
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="exposant?.presentation" class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors" size="12">
+              <h2>{{ 'exhibitors.infos.title' | translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <p class="presentation-societe" [innerHTML]="exposant.presentation"></p>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top" *ngIf="getCoordinatesDetails().length > 0">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'exhibitors.coordonnees.title' |translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin ion-text-xl-capitalize" color="dark">
+              <div class="ion-padding">
+                <app-contact-detail [details]="coordinates"></app-contact-detail>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row
+      class="grid-no-padding-background ion-padding ion-no-padding-top"
+      *ngIf="exposant?.nomPrenom?.trim() || exposant?.emailContact || exposant?.telephoneContact"
+    >
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'exhibitors.contact.title' |translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <app-contact-detail [details]="contact"></app-contact-detail>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row *ngIf="exposant?.productsDescription" class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'exhibitors.presentationProduits.title' |translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <p [innerHTML]="exposant.productsDescription"></p>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top" *ngIf="exposant?.products && exposant.products.length > 0">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{'exhibitors.produits.title' |translate}}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <ion-list class="ion-no-margin ion-no-padding">
+                  <ion-item *ngFor="let product of exposant?.products" class="ion-text-wrap">
+                    <ion-icon color="congressultralight" slot="start" name="reader-outline"></ion-icon>
+                    <ion-label color="congressultralight">
+                      <h2 class="exposant-detail__font-bold exposant-detail__white-space" [innerHTML]="product.productName"></h2>
+                      <a class="linkProducts" (click)="openUrl(product?.productFile)"
+                        >{{ 'exhibitors.produits.see-product' | translate }}</a
+                      >
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top" *ngIf="(symposiaScientific | json) !== ({} | json)">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'exhibitors.symposia.title' |translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <ion-list>
+                  <ng-container *ngFor="let symposiaDay of symposiaScientific | keyvalue">
+                    <ng-container *ngFor="let symposiaGroup of symposiaDay.value.groups | keyvalue">
+                      <ion-item lines="none">
+                        <ion-icon name="calendar-outline" color="congressultralight"></ion-icon>&nbsp;
+                        <ion-label class="ion-no-padding-top tittle-days">
+                          {{ symposiaDay.value.date }} - {{ 'programme.titles.' + symposiaGroup.value.time | translate }}
+                        </ion-label>
+                      </ion-item>
+                      <app-session-item-schedule
+                        *ngFor="let session of symposiaGroup.value.sessions"
+                        [session]="session"
+                        [link]="'/app/tabs/programme/session/' + session.idDate +  '/' + session.idSession"
+                        [linkQueryParams]="{ routeBack: '/app/tabs/exposants/exposant-details/' + exposant?.id }"
+                        [hasFavoriteStar]="false"
+                      >
+                      </app-session-item-schedule>
+                    </ng-container>
+                  </ng-container>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top" *ngIf="(symposiaTraining | json) !== ({} | json)">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'exhibitors.symposia.title' |translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <ion-list>
+                  <ng-container *ngFor="let symposiaDay of symposiaTraining | keyvalue">
+                    <ng-container *ngFor="let symposiaGroup of symposiaDay.value.groups | keyvalue">
+                      <ion-item lines="none">
+                        <ion-icon name="calendar-outline" color="congressultralight"></ion-icon>&nbsp;
+                        <ion-label class="ion-no-padding-top tittle-days">
+                          {{ symposiaDay.value.date }} - {{ 'programme.titles.' + symposiaGroup.value.time | translate }}
+                        </ion-label>
+                      </ion-item>
+                      <app-session-item-schedule
+                        *ngFor="let session of symposiaGroup.value.sessions"
+                        [session]="session"
+                        [link]="'/app/tabs/programme/session/' + session.idDate +  '/' + session.idSession"
+                        [linkQueryParams]="{ routeBack: '/app/tabs/exposants/exposant-details/' + exposant?.id }"
+                        [hasFavoriteStar]="false"
+                      >
+                      </app-session-item-schedule>
+                    </ng-container>
+                  </ng-container>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row *ngIf="exposant?.contactMail" class="ion-no-padding">
+      <ion-col size="12" class="ion-padding">
+        <app-horizontal-button
+          [icon]="{name: 'mail-outline'}"
+          title="{{ 'exhibitors.contact-us' | translate }}"
+          text=" "
+          colorTitle="congress"
+          (clicked)="clickContactUs(exposant.contactMail)"
+        >
+        </app-horizontal-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

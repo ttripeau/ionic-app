@@ -1,0 +1,20 @@
+ion-toolbar {
+  --background: rgba(var(--ion-color-congress-rgb), 1);
+}
+ion-content {
+  // --background: var(--ion-color-congress-background-gradient-modals);
+  --background: #FFFFFF;
+}
+
+
+.editor {
+  // height: calc(100vh - 360px);
+  height: calc(100vh - 97px - var(--ion-safe-area-bottom));
+  display: block;
+}
+
+.content {
+  &::part(scroll) {
+    padding-top: 0;
+  }
+}

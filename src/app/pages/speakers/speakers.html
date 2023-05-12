@@ -1,0 +1,50 @@
+<app-main-header
+  colorBtn="dark"
+  colorBg="light"
+  [title]="'home.buttons.speakers' | translate"
+  [positionAbsolute]="false"
+  [colorTitle]="'dark'"
+  [account]="false"
+>
+  <ion-toolbar class="ion-no-border" *ngIf="dataConfig && dataConfig.queryText">
+    <ion-searchbar
+      [(ngModel)]="dataConfig.queryText.speakers"
+      (ionChange)="searchSpeaker()"
+      class="speaker-searchbar"
+      placeholder="{{ 'global.search' | translate }} ... "
+      debounce="1000"
+      [showCancelButton]="isios ? 'always' : undefined"
+      cancelButtonText="{{'global.cancel' | translate}}"
+    >
+    </ion-searchbar>
+  </ion-toolbar>
+</app-main-header>
+
+<ion-content id="speaker-list">
+  <ion-list>
+    <ion-item *ngFor="let speaker of speakersToShow" [detail]="true" [id]="speaker.idSpeaker" (click)="goToSpeakerDetail(speaker)">
+      <app-avatar-initials
+        [firstName]="speaker?.firstName"
+        [lastName]="speaker?.lastName"
+        [picture]="speaker?.picture"
+        [avatarSize]="50"
+        [textSize]="22"
+        slot="start"
+      >
+      </app-avatar-initials>
+      <ion-label>
+        <h2>{{speaker.firstName}}&nbsp;<b>{{speaker.lastName}}</b></h2>
+        <p>{{speaker.institute}}</p>
+        <p>
+          {{speaker.town ? speaker.town + ', ' : ''}}
+          <span style="text-transform: capitalize">{{speaker.country ? speaker.country.toLowerCase() : ''}}</span>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll *ngIf="!isLoading" threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{'global.loading-more-data' | translate}}">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

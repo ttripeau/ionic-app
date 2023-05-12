@@ -1,0 +1,44 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" swipeGesture="false" *ngIf="appConfig.burger">
+      <ion-header>
+        <ion-toolbar translucent>
+          <ion-title mode="ios" class="titleIonMenu">{{ dataConfig.congressName }}</ion-title>
+          <ion-icon name="close" size="large" color="congress" (click)="closeMenu()"></ion-icon>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-menu-toggle detail="false">
+          <div class="ion-padding-vertical">
+            <img
+              [src]="mainSponsor && mainSponsor.src"
+              onerror="this.src='assets/img/default-imgs/default-main-sponsor.png'"
+              (click)="clickAdMainSponsor()"
+            />
+          </div>
+        </ion-menu-toggle>
+        <ion-list class="ion-padding-top" mode="ios" *ngFor="let subMenu of appConfig.burger">
+          <ion-list-header>
+            {{ subMenu.title | translate }}
+          </ion-list-header>
+          <ion-menu-toggle autoHide="false" *ngFor="let link of subMenu.links">
+            <ion-item
+              (click)="clickMenuLink(link)"
+              expand="block"
+              [routerLink]="link.routerLink"
+              routerLinkActive="active"
+              routerDirection="root"
+              detail="false"
+            >
+              <ion-icon slot="start" [src]="link.icon.src" [name]="link.icon.name"></ion-icon>
+              <ion-label> {{ link.label | translate }} </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+  <jeep-sqlite autoSave="true" wasmPath="/assets/wasm"></jeep-sqlite>
+</ion-app>

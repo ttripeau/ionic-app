@@ -1,0 +1,40 @@
+<ion-tabs #tabs (ionTabsWillChange)="setCurrentTab()">
+  <div *ngIf="showFab && maxTab" class="fab-wrapper" [hidden]="!showTabs()" [class]="{'ios': isIos}">
+    <div class="fab" (click)="clickMenuTab(maxTab)">
+      <ion-icon
+        [class]="selectedTab === maxTab.click?.method ? 'tab-selected' : '' + maxTab.className"
+        [name]="maxTab.icon.name"
+        [src]="maxTab.icon.src"
+      ></ion-icon>
+
+      <ion-label>{{maxTab.label| translate}}</ion-label>
+    </div>
+  </div>
+
+  <ion-tab-bar *ngIf="menuTabs" slot="bottom" [hidden]="!showTabs()">
+    <ng-container *ngFor=" let tab of menuTabs ">
+      <ion-tab-button
+        *ngIf="tab.tabName && tab.className !== 'max-size'"
+        [tab]="tab.tabName"
+        (click)="clickMenuTab(tab)"
+        [class]="tab.className"
+      >
+        <ion-icon [name]="tab.icon.name" [src]="tab.icon.src"></ion-icon>
+        <ion-label>{{tab.label| translate}}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button
+        *ngIf="!tab.tabName && tab.className !== 'max-size'"
+        (click)="clickMenuTab(tab)"
+        [class]="selectedTab === tab.click?.method ? 'tab-selected' : '' + tab.className"
+      >
+        <ion-icon [name]="tab.icon.name" [src]="tab.icon.src"></ion-icon>
+        <ion-label>{{tab.label| translate}}</ion-label>
+      </ion-tab-button>
+      <div class="max-size" *ngIf="!tab.tabName && tab.className === 'max-size'" height="50" width="100"></div>
+    </ng-container>
+  </ion-tab-bar>
+
+  <div *ngIf="!isConnected && !isSplash" class="no-internet" [ngClass]="{ 'no-tabs': !showTab }">
+    <div class="value">{{ 'connection.offline' | translate }}</div>
+  </div>
+</ion-tabs>

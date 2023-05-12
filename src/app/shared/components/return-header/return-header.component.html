@@ -1,0 +1,58 @@
+<ion-header class="appReturnHeader ion-no-border">
+  <ion-toolbar
+    [color]="colorBg"
+    class="toolbarAppReturnHeader"
+    [ngStyle]="{
+      position: positionAbsolute ? 'absolute' : 'relative',
+      'background-color': colorBg === 'light' ? '#fff' : colorBg ? 'rgba(var(--ion-color-' + colorBg + '-rgb), .5)' : 'var(--ion-color-header)'
+    }"
+  >
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="buttonBack" (click)="goBack($event)" [color]="colorBtn" [text]="text" [defaultHref]="defaultHref"> </ion-back-button>
+
+      <ion-button *ngIf="!buttonBack" (click)="previousRoute($event)" detail="false" [color]="colorBtn">
+        <ion-icon ios="chevron-back-outline" md="arrow-back-outline" [size]="isIos ? 'large' : 'medium'" class="ion-no-margin"></ion-icon>
+        <span>{{ text }}</span>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="hasFavorite">
+      <ion-button *ngIf="isFavorite" [color]="colorBtn" (click)="removeFavoriteHandler()">
+        <ion-icon size="large" name="heart" class="is-favorite"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!isFavorite" [color]="colorBtn" (click)="addFavoriteHandler()">
+        <ion-icon size="large" name="heart-outline" class="not-is-favorite"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="hasAddToMySession">
+      <ion-button [color]="colorBtn" (click)="addToMyCalendar()">
+        <ion-icon size="large" name="calendar" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="forCamera">
+      <ion-button [color]="colorBtn" (click)="saveHandler()">
+        <ion-icon size="large" name="save-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="newMessage">
+      <app-small-button
+        (clicked)="openNewConversation()"
+        [icon]="{name: 'add'}"
+        text="{{'global.new' | translate}}"
+        [color]="'congressbis-rgb'"
+        [colorText]="'congressbis'"
+      >
+      </app-small-button>
+      <!-- <ion-button size="small" class="btn" shape="round" fill="solid" type="block" routerLink="/app/tabs/new-conversation">
+        <ion-icon slot="start" color="congressultralight" name="add"></ion-icon>
+        <ion-label color="congressultralight">{{'global.new' | translate}}</ion-label>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title [color]="colorTitle">{{ title }}</ion-title>
+  </ion-toolbar>
+
+  <ng-content></ng-content>
+</ion-header>

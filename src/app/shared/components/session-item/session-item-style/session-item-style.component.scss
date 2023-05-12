@@ -1,0 +1,178 @@
+.sessions-day {
+  width: 100%;
+  border-bottom: none;
+  padding: 5px 0 5px 0px;
+
+  & > ion-grid {
+    width: 100%;
+  }
+
+  &__time {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+
+    &__label {
+      margin-top: auto;
+      margin-bottom: auto;
+      text-align: center;
+    }
+
+    &.isLive {
+      min-height: 100px;
+    }
+
+    ion-badge {
+      margin-top: 10px;
+    }
+  }
+
+  &__content {
+    border-left-style: solid;
+    border-left-width: 4px;
+    padding: 10px;
+    height: 100%;
+
+    &.ion-no-padding {
+      padding: 0;
+    }
+
+    &__title {
+      white-space: normal;
+
+      .congress {
+        color: var(--ion-color-dark);
+      }
+
+      .congressultralight {
+        color: var(--ion-color-congress-ultralight);
+      }
+    }
+
+    &__track {
+      max-width: 100%;
+      white-space: break-spaces;
+
+      &__chip {
+        max-width: 95%;
+
+        &__label {
+          overflow-wrap: break-word;
+          text-overflow: ellipsis !important;
+          white-space: break-spaces !important;
+        }
+
+        &__icon {
+          font-size: 20px;
+          vertical-align: sub;
+        }
+      }
+    }
+  }
+
+  &__action {
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center !important;
+    align-content: center !important;
+    text-align: right;
+    flex-direction: column;
+
+    &__icon {
+      &--gold {
+        color: var(--ion-color-congress-heart);
+      }
+      &--black {
+        color: black;
+
+        &.lunch-box {
+          transform: scale(1.5);
+        }
+      }
+      &--congress {
+        color: var(--ion-color-congress);
+      }
+    }
+  }
+}
+
+.see-all {
+  line-height: 1.2;
+  margin-top: 0;
+
+  &__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  ion-icon {
+    padding-left: 4px;
+    padding-top: 7px;
+  }
+}
+
+.social-link {
+  line-height: 1.2;
+  margin-top: 0;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  &__label {
+    margin-top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    text-transform: initial;
+  }
+
+  ion-icon {
+    padding-left: 4px;
+  }
+}
+
+ion-item.no-border ion-label.sessions-day__content {
+  border-left: 0;
+}
+
+.do-i-appear {
+  --background: rgba(var(--ion-color-congress-ultralight-rgb), 0.2);
+}
+
+.passed-session {
+  position: relative;
+  --background: transparent;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(#fff, 0.5);
+    z-index: 999;
+    pointer-events: none;
+  }
+}
+
+.live {
+  display: flex;
+}
+
+.point {
+  background: var(--ion-color-light);
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  margin: auto 0;
+  margin-right: 4px;
+}

@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon color="light" name="close-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light">{{'global.filters' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="validFormFilters()">
+        <ion-icon slot="start" name="checkmark-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="filtersession-page">
+  <ion-grid class="ion-text-center filtersession-page__grid">
+    <ion-row>
+      <ng-container *ngFor="let filter of getConfig(); let index = index;">
+        <ion-col *ngIf="filters[filter.val] && filters[filter.val].length > 0; " size="12" (click)="changeSelectedFilter(filter.val)">
+          <ion-card
+            class="ion-no-margin"
+            [class]="'filter filter-' + ((index % 3) + 1)"
+            id="filter"
+            [ngStyle]="{'background-image': 'url(' + filter.background + ')'}"
+            >
+            <!-- <app-blocks-svg [block]="((index % 3) + 1) + ''" color="light" class="img-bg"></app-blocks-svg> -->
+            <p>{{'filter-session.by-' + filter.val | translate}}</p>
+            <div class="filter__icon">
+              <ion-icon [name]="getName(filter)" [src]="getSrc(filter)"></ion-icon>
+            </div>
+          </ion-card>
+        </ion-col>
+        <!-- *ngIf="selectedFilter === filter.val" -->
+        <ion-col class="item-accordion" size="12">
+          <ion-list>
+            <ng-container *ngFor="let entry of this.filters[filter.val]">
+              <div class="items" *ngIf="(entry.isTheme && showThemes) || !entry.isTheme" lines="none">
+                <ion-checkbox *ngIf="!entry.isTheme" color="congress" slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
+                <ion-label *ngIf="!entry.isTheme" color="light" class="ion-text-wrap" (click)="entry.isChecked = !entry.isChecked">{{entry.val}}</ion-label>
+                <h3 *ngIf="entry.isTheme && showThemes">{{entry.val}}</h3>
+              </div>
+            </ng-container>
+          </ion-list>
+          <!-- <ion-infinite-scroll (ionInfinite)="onIonInfinite($event, filters[filter.val])">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          </ion-infinite-scroll> -->
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,19 @@
+ion-toolbar,
+ion-content {
+  --background: rgba(var(--ion-color-congress-rgb), 1.0);
+  --color: var(--ion-color-light);
+}
+
+ion-content {
+
+  &::part(scroll) {
+    padding-top: 0;
+    overflow-y: auto;
+  }
+
+  .avatar {
+    background-color: #fff;
+    object-fit: contain;
+    object-position: center;
+  }
+}

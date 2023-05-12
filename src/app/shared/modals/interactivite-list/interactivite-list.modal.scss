@@ -1,0 +1,153 @@
+ion-toolbar {
+  --background: rgba(var(--ion-color-congress-rgb), .9);
+}
+ion-content {
+  --background: var(--ion-color-congress-background-gradient-modals-interactivity);
+}
+
+#interactivite-list-page {
+  &::part(scroll) {
+    padding-top: 0;
+  }
+
+  .interactivite-list-page__grid {
+    height: 100%;
+  }
+
+  .item-accordion {
+    display: block;
+  }
+
+  .ng-hide {
+    display: none;
+  }
+
+  .congress-color {
+    color: var(--ion-color-light);
+  }
+
+  ion-card {
+    min-height: 120px;
+    box-shadow: none;
+    color: var(--ion-color-text-link);
+
+    p {
+      bottom: 0;
+      margin: 10px;
+      position: absolute;
+      line-height: 22px;
+      font-size: 22px;
+      text-align: left;
+    }
+
+    ion-icon {
+      font-size: 140px;
+      opacity: 0.3;
+      position: absolute;
+      right: 0;
+      top: -20px;
+      right: 0px;
+    }
+  }
+
+  ion-card-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    ion-label {
+      color: var(--ion-color-light);
+      z-index: 2;
+      font-size: 24px;
+      text-align: start;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+  }
+
+  .choiceRoom {
+    position: relative;
+    width: 100%;
+    min-height: 120px;
+    background-size: cover;
+    padding: 14px;
+    background: var(--ion-color-congress-buttons-full-width);
+    display: flex;
+    align-items: center;
+
+    // &:before {
+    //   content: "";
+    //   z-index: 1;
+    //   position: absolute;
+    //   top: 0px;
+    //   right: 0px;
+    //   width: 75%;
+    //   height: 100%;
+    //   background: url(/assets/icon/illu_coeur.png) 0 0 no-repeat;
+    //   background-size: cover;
+    //   opacity: 0.4;
+    // }
+
+    &.congressultralight {
+      background-image: url(/assets/img/interactivity/boutons-salles-800x280-A.jpg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      ion-label {
+        color: var(--ion-color-light);
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+    }
+
+    &.congressultralight-left {
+      background: var(--ion-color-congress-buttons-full-width-odd);
+      // background-image: url(/assets/img/interactivity/interactivity-A.jpg);
+      // background-position: left;
+      // background-repeat: no-repeat;
+      // background-size: cover;
+      // background-size: 200%;
+
+      ion-label {
+        color: var(--ion-color-light);
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+    }
+
+    &.congressultralight-right {
+      background: var(--ion-color-congress-buttons-full-width-even);
+      // background-image: url(/assets/img/interactivity/interactivity-B.jpg);
+      // background-position: right;
+      // background-repeat: no-repeat;
+      // background-size: cover;
+      // background-size: 200%;
+
+      ion-label {
+        color: var(--ion-color-light);
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+    }
+
+    @media screen and (max-width: 440px) {
+      ion-label {
+        font-size: 22px;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      ion-label {
+        font-size: 20px;
+      }
+    }
+
+    @media screen and (max-width: 380px) {
+      ion-label {
+        font-size: 20px;
+      }
+    }
+  }
+}

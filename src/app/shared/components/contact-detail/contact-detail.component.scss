@@ -1,0 +1,63 @@
+.app-contact-detail {
+  ion-label {
+    margin-left: 10px;
+    font-size: 16px;
+
+    .contact-light {
+      color: var(--ion-color-light);
+    }
+
+    .contact-dark {
+      color: var(--ion-color-dark);
+    }
+
+    .no-underline {
+      text-decoration: none;
+    }
+  }
+}
+
+.CoronaryInterventions {
+  border-left: solid 4px #0070cd;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+
+.InterventionsforValvularDisease {
+  border-left: solid 4px #00ae41;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+
+.InterventionsforHeartFailure {
+  border-left: solid 4px #683816;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+
+.PeripheralInterventions {
+  border-left: solid 4px #ff6a00;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+
+.InterventionsforHypertension {
+  border-left: solid 4px #d7006d;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+
+.InterventionsforStroke {
+  border-left: solid 4px #5d0c8b;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+
+ion-icon.icon-top {
+  align-self: flex-start;
+  padding-top: 14px;
+}
+
+.no-events {
+  pointer-events: none;
+}

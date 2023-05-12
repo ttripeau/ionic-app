@@ -1,0 +1,27 @@
+.card-header-img::before {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 65px;
+  height:calc(100% + 5px);
+  background: url(/assets/icon/illu_coeur.png) 0 0 no-repeat;
+  background-size: cover;
+  opacity: 0.4;
+}
+
+ion-card-title {
+  font-size: 22px;
+}
+
+ion-card-subtitle {
+  font-size: 13px;
+}
+
+ion-card-header {
+  padding: 12px 10px 10px 18px;
+}
+
+ion-card-content.overflow-auto {
+  overflow: auto;
+}

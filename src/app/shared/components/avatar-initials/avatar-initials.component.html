@@ -1,0 +1,39 @@
+<ion-avatar
+  *ngIf="!appConfig.speakersPage?.showInitials"
+  class="photoUser"
+  [ngClass]="{ 'has-margin-top': hasMarginTop }"
+  [ngStyle]="{ 'height.px': avatarSize, 'width.px': avatarSize }"
+  (click)="handleCLick($event)"
+>
+  <img
+    [ngClass]="this?.picture ? 'profilePic' : ''"
+    [src]="this.picture ? this.picture : 'assets/img/user.png'"
+    onerror="this.src='assets/img/default-imgs/default-speaker.jpg'"
+  />
+</ion-avatar>
+<ion-avatar
+  [ngClass]="{ 'has-margin-top': hasMarginTop }"
+  class="photoUser"
+  [ngStyle]="{ 'height.px': avatarSize, 'width.px': avatarSize }"
+  *ngIf="appConfig.speakersPage?.showInitials && this?.picture"
+  (click)="handleCLick($event)"
+>
+  <img
+    [ngClass]="this?.picture ? 'profilePic' : ''"
+    [src]="this.picture ? this.picture : 'assets/img/user.png'"
+    onerror="this.src='assets/img/default-imgs/default-speaker.jpg'"
+  />
+</ion-avatar>
+<ion-avatar
+  class="ionAvatarInitials"
+  [ngClass]="{ 'has-margin-top': hasMarginTop }"
+  *ngIf="appConfig.speakersPage?.showInitials && !this?.picture"
+  [ngStyle]="{ 'height.px': avatarSize, 'width.px': avatarSize }"
+>
+  <span
+    *ngIf="appConfig.speakersPage?.showInitials"
+    class="avatarInitials"
+    [ngStyle]="{ 'height.px': avatarSize, 'width.px': avatarSize, 'line-height.px': avatarSize, 'font-size.px': textSize }"
+    [innerHTML]="getInitials()"
+  ></span>
+</ion-avatar>

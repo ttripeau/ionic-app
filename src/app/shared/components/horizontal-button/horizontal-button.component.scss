@@ -1,0 +1,49 @@
+.app-horizontal-button {
+  margin: 0;
+
+  h3 {
+    font-weight: 600;
+    color: #000;
+    font-size: 16px;
+  }
+
+  .margin-fix {
+    margin-bottom: 6px;
+  }
+
+  ion-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .flex  {
+    display: flex;
+  }
+
+  .chevron {
+    font-size: 24px;
+  }
+
+  &.gradient {
+    background: var(--ion-color-congress-buttons-full-width);
+  }
+
+  &.congressbis-outline {
+    border: solid 1px var(--ion-color-congress-bis);
+
+    .icon-wrapper {
+      &::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: 52px;
+        height: 52px;
+        background: var(--ion-color-congress-bis);
+        border-radius: 100%;
+      }
+    }
+
+  }
+}

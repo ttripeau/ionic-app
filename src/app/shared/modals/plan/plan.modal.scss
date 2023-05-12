@@ -1,0 +1,18 @@
+ion-slides {
+  --bullet-background-active: var(--ion-color-congress);
+}
+
+.plan {
+  height: 100%;
+
+  &__grid {
+    height: 100%;
+
+    &__row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:currentColor;}
+	.st1{fill:#7C1093;}
+	.st2{fill:#7C1093;}
+	.st3{fill:#7C1093;}
+
+	.st1 {
+animation: 3s anim infinite;
+		}
+	.st2 {
+animation: 3s 0.2s anim infinite;
+	}
+	.st3 {
+animation: 3s 0.3s anim infinite;
+	}
+
+@keyframes anim {
+  0% {
+    ry: 48.3px;
+    cy="210";
+    opacity:.8;
+  }
+  10% {
+    ry: 18.3px;
+    cy="260";
+    opacity:.8;
+  }
+  20% {
+    ry: 48.3px;
+    cy="210";
+    opacity:1;
+  }
+  50%{
+      opacity:.5;
+  }
+  100% {
+    ry: 48.3px;
+    cy="210";
+    opacity:1;
+  }
+}
+</style>
+<path class="st0" d="M0,64C0,28.7,28.7,0,64,0h384c35.3,0,64,28.7,64,64v288c0,35.3-28.7,64-64,64H309.3l-123.7,92.8
+	c-4.8,3.6-11.3,4.2-16.8,1.5s-8.8-8.2-8.8-14.3v-80H64c-35.3,0-64-28.7-64-64V64z"/>
+
+<ellipse class="st1 a1" cx="112.8" cy="210" rx="48.3" ry="48.3"/>
+<ellipse class="st2 a1" cx="251.8" cy="210" rx="48.3" ry="48.3" />
+<ellipse class="st3 a1" cx="391.7" cy="210" rx="48.3" ry="48.3"/>
+</svg>

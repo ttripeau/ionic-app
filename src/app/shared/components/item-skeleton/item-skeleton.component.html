@@ -1,0 +1,13 @@
+<ion-item class="item-skeleton" [lines]="lines">
+  <ion-avatar *ngIf="rounded" slot="start">
+    <ion-skeleton-text animated></ion-skeleton-text>
+  </ion-avatar>
+  <ion-thumbnail *ngIf="!rounded" slot="start">
+    <ion-skeleton-text animated></ion-skeleton-text>
+  </ion-thumbnail>
+  <ion-label>
+    <p *ngFor="let value of fakeArray">
+      <ion-skeleton-text animated [style]="{width: value+'%'}"></ion-skeleton-text>
+    </p>
+  </ion-label>
+</ion-item>

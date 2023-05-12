@@ -1,0 +1,407 @@
+{
+  "global": {
+    "voirtout": "See all",
+    "back": "Back",
+    "pleasewait": "Veuillez patienter",
+    "loading": "Loading",
+    "map": "Map",
+    "filter": "Filter",
+    "filters": "Filters",
+    "all": "All",
+    "submit": "Apply",
+    "search": "Search",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "select-all": "Select all",
+    "unselect-all": "Unselect all",
+    "login": "Login",
+    "logout": "Log out",
+    "sign-up": "Register",
+    "loading-more-data": "Loading more data...",
+    "close": "Close",
+    "open-maps": "Open map",
+    "open": "Open",
+    "new": "New",
+    "evaluate-sessions": "Evaluate your sessions",
+    "like": "like",
+    "previous": "Previous",
+    "next": "Next",
+    "lets-go": "Let's go",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK"
+  },
+  "congre": {
+    "date": "12 - 15 January 2023"
+  },
+  "tabs": {
+    "home": "Home",
+    "programme": "Programme",
+    "complete-program": "Programme",
+    "exposants": "Industry",
+    "associations": "Associations",
+    "exhibitor-partners": "Industry Partners",
+    "exhibition-map": "Exhibition map",
+    "partners-list": "Partners List",
+    "survey": "Satisfaction Survey",
+    "abstracts": "Abstracts",
+    "infos": "Info",
+    "practical-infos": "Useful Info",
+    "myaccount": "My Profile",
+    "joinchat": "Interact",
+    "trainingvillage": "Training Village",
+    "sub-congresses": "Sub Congresses",
+    "myprogramme": "My Programme",
+    "faq": "FAQ",
+    "about": "About",
+    "messessions": "My Programme",
+    "speakers": "Speakers",
+    "interactivity": "Interactivity",
+    "chat": "Interactivity",
+    "produits": "Products",
+    "registration": "Registration",
+    "join-chat": "Interact",
+    "scan-exhibitor": "Scan exhibitor",
+    "elect-your-start-up": "Elect your start-up",
+    "interactive-map": "Map",
+    "special-paramedics": "Special paramedics",
+    "youth-special": "Youth Special",
+    "news": "News",
+    "ask-your-questions": "Live Chat During Sessions",
+    "jobs": "Offres d'emploi",
+    "posters": "Posters",
+    "certificateAttendance": "Certificate of attendance",
+    "map": "Palace map",
+    "eloquence-contest": "Eloquence contest",
+    "notes": "My Notes",
+    "badge": "Badge Pick-up",
+    "escape-game": "Escape game",
+    "synopsis": "Synopsis",
+    "evaluate-sessions": "Evaluate your sessions",
+    "qi-gong": "Qi Gong",
+    "camera": "Camera",
+    "pictures-gallery": "Gallery"
+  },
+  "home": {
+    "buttons": {
+      "speakers": "Speakers",
+      "map": "Map",
+      "mapexpo": "Exhibitors map",
+      "listeexpo": "List",
+      "join_chat": "Interact",
+      "interactivity": "Interactivity",
+      "inscription": "Registration",
+      "join-chat-text": "Une phrase à modifier pour expliquer le bouton",
+      "interactive-map": "Locate the rooms and facilities",
+      "interact": "Choose your room to interact and ask questions during sessions",
+      "about-title": "Useful Info",
+      "about-text": "Useful information about your Course",
+      "happening-now-title": "Happening Now",
+      "happening-now-text": "No sessions happening currently"
+    },
+    "button-text": {
+      "speakers": "View all speakers.",
+      "programme": "Show all sessions."
+    },
+    "no-session-currently": "No sessions happening currently",
+    "no-session-currently-my-programme": "Sessions you add to ",
+    "no-session-currently-my-programme-end": " My Programme will be displayed here",
+    "left-minutes": "{{minutes}} minute(s) left",
+    "bientot": {
+      "title": "Coming soon",
+      "commenceDans": "Starts in {{nombreJours}} day(s)",
+      "commenceDansHeures": "Starts in {{nombreHeures}} hour(s)",
+      "commenceDansMins": "Starts in {{nombreMins}} minutes(s)"
+    },
+    "enCeMoment": {
+      "title": "Happening now",
+      "see-all": "See all"
+    },
+    "speakers": {
+      "title": "Speakers"
+    },
+    "networks": {
+      "title": "Join the Facebook group",
+      "button": "Join Now",
+      "website": "Website",
+      "platform": "Congress platform",
+      "vod": "VOD",
+      "replay": "Replays",
+      "certificateAttendance": "Certificate of attendance"
+    },
+    "entities": {
+      "title": "Entities"
+    },
+    "voucher": {
+      "title": "Retirer mon bon de retrait",
+      "text": "Téléchargez vottre bon de retrait"
+    }
+  },
+  "programme": {
+    "titles": {
+      "morning": "Morning",
+      "afternoon": "Afternoon"
+    },
+    "session-found": " session(s) found",
+    "session-type": "Session type",
+    "raz": "RAZ",
+    "ended": "Ended",
+    "saved-my-programme": "Saved to My Programme",
+    "removed-my-programme": "Removed from My Programme",
+    "start-soon-in": "Starting soon in ",
+    "start-soon": "Starting soon",
+    "search": "Search ",
+    "other-filters": "Other filters"
+  },
+  "interactivity": {
+    "choose-room": "Choose your room",
+    "ask-your-questions": "Choose your room to interact in real time during sessions:"
+  },
+  "exhibitors": {
+    "map": "Map",
+    "list": "List",
+    "contact-us": "Contact us",
+    "main-sponsor": "MAIN SPONSOR",
+    "find-us-at-stand": "Find us at Stand",
+    "infos": {
+      "title": "General information"
+    },
+    "description": {
+      "title": "Description"
+    },
+    "coordonnees": {
+      "title": "Contact details"
+    },
+    "contact": {
+      "title": "Contact information"
+    },
+    "presentationProduits": {
+      "title": "Products",
+      "text": "Discover the products of our partners."
+    },
+    "produits": {
+      "title": "Products",
+      "see-product": "See the product",
+      "content": "Discover the products of our partners."
+    },
+    "maps": {
+      "see-maps": "See the map"
+    },
+    "symposia": {
+      "scientific": "View all sessions",
+      "training": "View all Training sessions"
+    },
+    "order": {
+      "associations": "Associations",
+      "industry-partners": "Industry Partners",
+      "platinum": "Platinum",
+      "gold": "Gold",
+      "silver": "Silver",
+      "bronze": "Bronze",
+      "normal": "Industry Partners"
+    },
+    "locate": {
+      "title": "Locate on map",
+      "content": "Open the map to find"
+    },
+    "sessions": {
+      "title": "Sessions",
+      "content": "View all sessions supported by"
+    },
+    "training-sessions": {
+      "title": "Training Village sessions",
+      "content": "View all training sessions from"
+    },
+    "exhibitors-found": "exhibitor(s) found"
+  },
+  "about": {
+    "title": "Useful Information",
+    "certificateAttendance": "Certificate attendance",
+    "buttons": {
+      "remotePracticalInformation": "E-congrès useful information"
+    }
+  },
+  "speakers": {
+    "infos": {
+      "title": "General information"
+    },
+    "programme": {
+      "title": "Sessions"
+    },
+    "biography": {
+      "title": "Biography"
+    },
+    "go-to-chat": {
+      "title": "Chat",
+      "content": "Start a conversation with"
+    }
+  },
+  "session": {
+    "replay": "Replay",
+    "lunch-box": "Lunch Box",
+    "related-publication": "Related publication",
+    "live": "LIVE",
+    "available-on-replay": "Available on replay",
+    "ask-your-questions": "React",
+    "see-exhibitor": "See exhibitor",
+    "i-am": "I am {{role}}",
+    "exhibitor-button": {
+      "title": "View Industry Partner",
+      "content": "Learn more about"
+    },
+    "infos": {
+      "title": "General information",
+      "sponsored-by": "Sponsored by"
+    },
+    "supported-sentence": {
+      "title": "Supported sentence"
+    },
+    "objectives": {
+      "title": "Objectives"
+    },
+    "moderators": {
+      "one_title": "Speaker",
+      "title": "Speakers"
+    },
+    "interventions": {
+      "one_title": "Intervention",
+      "title": "Interventions"
+    },
+    "speaker": {
+      "one_title": "Speaker",
+      "title": "Speakers"
+    },
+    "rate": {
+      "title": "Rate this session"
+    },
+    "attendees": {
+      "one_title": "Speaker",
+      "title": "Speakers"
+    },
+    "to-know-more": {
+      "title": "To know more"
+    },
+    "guest-comment": {
+      "title": "Additional information"
+    }
+  },
+  "notes": {
+    "title": "Notes",
+    "add_note": "Add",
+    "edit_note": "Edit",
+    "write_note": "Write a note...",
+    "save_note": "Save",
+    "export_on_success": "You will receive your notes by email.",
+    "export_on_fail": "Notes could not be exported. Please try again later.",
+    "export_notes": "Export the notes",
+    "export_button_text": "Receive all your notes by email.",
+    "send_button": "Send",
+    "not_found": "No note taken yet",
+    "export-empty": "Please add a note."
+  },
+  "schedule-options": {
+    "add-to-favorites": "Add to favorites",
+    "see-the-session": "See the session"
+  },
+  "filter-session": {
+    "by-topics": "TOPICS",
+    "by-room": "ROOM",
+    "by-tracks": "FORMAT",
+    "by-sponsors": "SPONSOR",
+    "by-type": "TYPE",
+    "by-themes": "THEME",
+    "by-theme": "THEME",
+    "by-session": "SESSION",
+    "by-targetedAudience": "AUDIENCE",
+    "by-replayUrl": "REPLAY",
+    "by-focuses": "FOCUS ON",
+    "by-hub": "INTERNATIONAL COLLABORATION",
+    "by-fonction": "FONCTION",
+    "by-company": "COMPANY",
+    "by-country": "COUNTRY"
+  },
+  "aproposde": {
+    "about": "About",
+    "development": "DEVELOPMENT",
+    "development-content-1": "This mobile application was created by ",
+    "development-content-2": ", European leader in the organization of Virtual, Hybrid and Face-to-face conferences.",
+    "politic": "Policy on personal data",
+    "politic-see-here": "Please find information on personal data by clicking here:",
+    "data-protection": "Data protection",
+    "cgu": "Terms of Use",
+    "click-cgu": "Please click here to see our T & Cs:",
+    "version": "VERSION"
+  },
+  "errors": {
+    "scan-error": "Invalid QR Code",
+    "connection-error": "A connection error has occurred."
+  },
+  "session-item": {
+    "see-abstract": "See the abstract"
+  },
+  "interactive-map": {
+    "level": "Level",
+    "find": "Find",
+    "find-room": "Find a room",
+    "where-am-i": "Where am I ?",
+    "see-more": "See more",
+    "no-values": "No result"
+  },
+  "connection": {
+    "offline": "You are not connected to internet",
+    "online": "Vous are now connected to internet",
+    "chat": "You must be connected to internet to be able to send a message"
+  },
+  "badge": {
+    "button": "Badge Pick-up",
+    "button-title": "Access your voucher",
+    "modal": {
+      "title": "Badge Pick-up",
+      "text": "Present this voucher at the venue to collect your badge"
+    }
+  },
+  "introduction": {
+    "slide-1": {
+      "title": "Welcome to",
+      "content": "Let us introduce the Courses App"
+    },
+    "slide-2": {
+      "title": "Pick up your badge",
+      "content": "Access your voucher to collect your badge at the venue"
+    },
+    "slide-3": {
+      "title": "Build your personalised Programme",
+      "content": "Add your sessions of interest to My Programme and receive notifications before they begin"
+    },
+    "slide-4": {
+      "title": "Interact during sessions",
+      "content": "Ask questions and vote during sessions alongside other participants"
+    },
+    "slide-5": {
+      "title": "Start a conversation using direct messages",
+      "content": "Use this opportunity to network with your peers, including online participants joining from all around the world"
+    },
+    "slide-6": {
+      "title": "Enhance your onsite experience",
+      "content": "Get to know the Speakers and Industry Partners, open the map… Everything you need is available in the App."
+    }
+  },
+  "feed-pictures": {
+    "no-content": {
+      "title": "Immortalize your memories",
+      "content": "Share the highlights of this event by posting your most beautiful commented photos in the gallery!"
+    }
+  },
+  "notifications": {
+    "title": "Notifications"
+  },
+  "happening-now": {
+    "title": "Happening now"
+  },
+  "sub-programme": {
+    "title-stent": "Stent Save a Life",
+    "title-fellows": "Fellow Course",
+    "title-innovators": "Innovator's day"
+  }
+}

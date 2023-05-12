@@ -1,0 +1,29 @@
+<ion-toolbar class="ion-no-border">
+  <ion-buttons slot="end">
+    <ion-button (click)="closeModal()">
+      <ion-icon color="light" name="close-outline" size="large"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content id="room-detail-page">
+  <ion-grid class="ion-text-center">
+    <ion-row size="12" class="ion-padding ion-align-items-center ion-justify-content-between">
+      <ion-avatar color="light">
+        <img onerror="this.src='assets/img/default-imgs/default-speaker.jpg'" [src]="room.exhibitor?.logo" class="avatar" />
+      </ion-avatar>
+      <ion-label>
+        <h2 class="titleAbstract">{{room.exhibitor?.name}}</h2>
+      </ion-label>
+    </ion-row>
+    <ion-row *ngIf="room.category === 'exposant' || room.category === 'salle'" class="ion-justify-content-center">
+      <ion-button (click)="closeModal('/app/tabs/exposants/exposant-details/' + room.exhibitor?.id)">
+        {{'interactive-map.see-more' | translate}}
+        <ion-icon color="light" slot="end" name="eye-outline"></ion-icon>
+      </ion-button>
+    </ion-row>
+    <ion-row size="12">
+      <p class="ion-text-left ion-padding-horizontal" [innerHTML]="room.exhibitor?.presentation"></p>
+    </ion-row>
+  </ion-grid>
+</ion-content>

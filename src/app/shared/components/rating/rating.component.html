@@ -1,0 +1,5 @@
+<ion-row>
+  <ion-col class="ion-padding">
+    <ion-icon [name]="iconStatus(i)" *ngFor="let ratingId of ratingArray; index as i" (click)="calculateRating(i + 1)"></ion-icon>
+  </ion-col>
+</ion-row>

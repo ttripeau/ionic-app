@@ -1,0 +1,166 @@
+<app-session-item-style></app-session-item-style>
+
+<ng-template #labels>
+  <ion-label *ngIf="session" class="sessions-day__content" [ngStyle]="{ 'border-left-color': getSessionColor(session) }">
+    <h3 class="sessions-day__content__title">
+      <!-- <b *ngIf="session?.reference">{{session.reference}} - </b> --> <b class="congress">{{ session.title }}</b>
+    </h3>
+    <p *ngIf="showTracks && session?.tracks && session.tracks.length > 0" class="sessions-day__content__track">
+      <ion-chip class="sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" [name]="getIcon().name" [src]="getIcon().src"> </ion-icon>
+          {{ getInlineTracks(session.tracks) }}
+        </ion-label>
+      </ion-chip>
+    </p>
+    <p *ngIf="showLocation && (session.room || (session.rooms?.length && session.rooms.length > 0))" class="sessions-day__content__track">
+      <ion-chip class="sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_presentation_light.svg"> </ion-icon>
+          {{ session.rooms && session.rooms.length && session.rooms.length > 0 ? getInlineRooms(session.rooms) : session.room }}
+        </ion-label>
+      </ion-chip>
+    </p>
+    <p *ngIf="session.sponsors?.length && session.sponsors.length > 0" class="sessions-day__content__track">
+      <ion-chip *ngIf="!sponsorsFullSize" class="ion-text-nowrap sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_sponsor.svg"> </ion-icon>
+          {{ getInlineSponsors(session.sponsors) }}
+        </ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="sponsorsFullSize" outline color="congress" class="sessions-day__content__track__chip">
+        <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_sponsor.svg"> </ion-icon>
+        <ion-label class="sessions-day__content__track__chip__label" color="dark" [innerHTML]="getInlineSponsors(session.sponsors)"></ion-label>
+      </ion-chip>
+    </p>
+    <p *ngIf="interactiveTag" class="sessions-day__content__track">
+      <ion-chip class="ion-text-nowrap sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" name="school-outline"> </ion-icon>
+          {{ interactiveTag.title }}
+        </ion-label>
+      </ion-chip>
+    </p>
+    <!-- <p *ngIf="session.themes?.length && session.themes.length > 0" class="sessions-day__content__track">
+      <ion-chip class="ion-text-nowrap sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_themes-topics.svg"> </ion-icon>
+          {{ getInlineThemes(session.themes) }}
+        </ion-label>
+      </ion-chip>
+    </p> -->
+
+    <!-- <p *ngIf="session.tags?.length && session.tags.length > 0 && hasReplay(session.tags)" class="sessions-day__content__track">
+      <ion-chip class="ion-text-nowrap sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_replay.svg"> </ion-icon>
+          Replay
+        </ion-label>
+      </ion-chip>
+    </p> -->
+    <p *ngIf="session.topics?.length && session.topics.length > 0" class="sessions-day__content__track">
+      <ion-chip class="ion-text-nowrap sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_themes-topics.svg"> </ion-icon>
+          {{ getInlineTopics(session.topics) }}
+        </ion-label>
+      </ion-chip>
+    </p>
+    <p *ngIf="session.focus?.length && session.themes.length > 0" class="sessions-day__content__track">
+      <ion-chip class="ion-text-nowrap sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_focus.svg"> </ion-icon>
+          {{ getInlineFocus(session.focus) }}
+        </ion-label>
+      </ion-chip>
+    </p>
+    <p *ngIf="session.ownRole" class="sessions-day__content__track">
+      <ion-chip class="ion-text-nowrap sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" name="person"> </ion-icon>
+          {{ session.ownRole.name }}
+        </ion-label>
+      </ion-chip>
+    </p>
+
+    <!-- <p *ngIf="session.type" class="sessions-day__content__track">
+      <ion-chip class="ion-text-nowrap sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_type.svg"> </ion-icon>
+          {{ session.type }}
+        </ion-label>
+      </ion-chip>
+    </p> -->
+  </ion-label>
+</ng-template>
+
+<ion-item
+  [attr.track]="session && session.topics ? encodeTrack(session.topics) : ''"
+  [detail]="!hasFavoriteStar && link"
+  class="ion-no-padding sessions-day"
+  [class]="{
+    'no-border': !realShowTime,
+    'do-i-appear': session.doIAppear,
+    'custom-border-radius': session.doIAppear,
+    'passed-session': isSessionPassed(session)
+  }"
+>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col
+        *ngIf="session && realShowTime"
+        size="2"
+        class="ion-text-center ion-align-items-center ion-justify-content-center sessions-day__time"
+        [class]="isSessionInProgress(session) ? 'isLive' : ''"
+      >
+        <ion-badge *ngIf="isSessionInProgress(session)" [color]="'danger'" class="live">
+          <div class="point"></div>
+          LIVE
+        </ion-badge>
+        <div class="sessions-day__time__label">
+          <ion-label *ngIf="session" color="dark"> {{ session.timeBegin }}<br />{{ session.timeEnd }} </ion-label>
+          <div *ngIf="session.tags?.length && session.tags.length > 0 && hasReplay(session.tags)">
+            <ion-button [id]="'click-replay-' + session.idSession" fill="clear">
+              <ion-icon class="sessions-day__action__icon--black" color="dark" src="assets/icon/icon_replay.svg"> </ion-icon>
+            </ion-button>
+            <ion-popover [trigger]="'click-replay-' + session.idSession" triggerAction="click">
+              <ng-template>
+                <ion-row class="ion-padding">{{ 'session.available-on-replay' | translate }}</ion-row>
+              </ng-template>
+            </ion-popover>
+          </div>
+          <div *ngIf="session.tags?.length && session.tags.length > 0 && hasLunchBox(session.tags)">
+            <ion-button [id]="'click-lunch-' + session.idSession" fill="clear">
+              <ion-icon class="sessions-day__action__icon--black lunch-box" color="dark" src="assets/icon/lunch-box.svg"> </ion-icon>
+            </ion-button>
+            <ion-popover [trigger]="'click-lunch-' + session.idSession" triggerAction="click">
+              <ng-template>
+                <ion-row class="ion-padding">{{ 'session.lunch-box' | translate }}</ion-row>
+              </ng-template>
+            </ion-popover>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col *ngIf="link" [size]="realShowTime ? (hasFavoriteStar ? 8 : 10) : hasFavoriteStar ? 10 : 12" expand="block" (click)="goToLink()">
+        <ng-container *ngTemplateOutlet="labels"></ng-container>
+      </ion-col>
+      <ion-col *ngIf="!link" [size]="realShowTime ? (hasFavoriteStar ? 8 : 10) : hasFavoriteStar ? 10 : 12">
+        <ng-container *ngTemplateOutlet="labels"></ng-container>
+      </ion-col>
+      <ion-col *ngIf="hasFavoriteStar" size="1" offset="1" class="sessions-day__action">
+        <ion-button *ngIf="session.isfavorite && !session.doIAppear" fill="clear" (click)="removeFavorite()">
+          <ion-icon class="sessions-day__action__icon--gold" slot="icon-only" name="heart"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="!session.isfavorite && !session.doIAppear" fill="clear" (click)="addFavorite()">
+          <ion-icon class="sessions-day__action__icon--black" slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button *ngIf="session.doIAppear" fill="clear" (click)="isOpen = true">
+          <ion-icon class="sessions-day__action__icon--congress" slot="icon-only" name="calendar-outline"></ion-icon>
+        </ion-button>
+
+        <app-add-to-my-calendar [session]="session" [isOpen]="isOpen" (closeModal)="isOpen = false"></app-add-to-my-calendar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>

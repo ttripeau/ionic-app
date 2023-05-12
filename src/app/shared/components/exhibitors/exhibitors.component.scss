@@ -1,0 +1,275 @@
+.speaker-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Due to the fact the cards are inside of columns the margins don't overlap
+ * properly so we want to remove the extra margin between cards
+ */
+ion-col:not(:last-of-type) .speaker-card {
+  margin-bottom: 0;
+}
+
+.speaker-card .speaker-item {
+  --min-height: 85px;
+}
+
+.speaker-card .speaker-item h2 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.speaker-card .speaker-item p {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.speaker-card ion-card-header {
+  padding: 0;
+}
+
+.speaker-card ion-card-content {
+  flex: 1 1 auto;
+
+  padding: 0;
+}
+
+.ios ion-list {
+  margin-bottom: 10px;
+}
+
+.md ion-list {
+  padding: 0;
+}
+
+#exposants-list-page {
+  padding-top: 70px;
+
+  ion-list{
+    border-top: none;
+
+    ion-avatar {
+      width: 20%;
+      height: 100%;
+
+      ion-img,
+      ion-img::part(image) {
+        border-radius: 0;
+        height: 46px;
+        max-width: 100%;
+        width: auto;
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+  }
+
+  ion-chip {
+    background: #fff;
+  }
+
+  .about-header {
+
+    position: relative;
+    width: 100%;
+    // margin-top: 60px;
+    //height: 320px;
+
+    #searchToolbarSchedule {
+      width: 100%;
+      --background: transparent;
+
+      .searchToolbarSchedule__searchbar {
+        --background: rgb(233, 233, 235, 0.8)
+      }
+    }
+
+    .about-image {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      opacity: 0;
+
+      transition: opacity 500ms ease-in-out;
+    }
+
+    .img-banner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 60px;
+      width: 100%;
+      font-weight: bolder;
+      font-size: 18px;
+      text-align: start;
+      background: var(--ion-color-light);
+      color: var(--ion-color-congress);
+      border-radius: 6px;
+
+      &--icon--map {
+        width: 35px;
+        height: 35px;
+        font-weight: 400;
+        margin-right: 20px;
+        padding: 5px;
+        background: var(--ion-color-congress);
+        color: var(--ion-color-light);
+        border-radius: 999px;
+      }
+
+      &--icon--chevron {
+        padding-top: 2px;
+        width: 24px;
+        height: 24px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .societeName {
+    text-transform: uppercase;
+    white-space: break-spaces;
+  }
+
+  .main-sponsor {
+    &__bookmark{
+      align-self: flex-start;
+      position: relative;
+      margin: 0;
+      height: 100px;
+      width: 80px;
+      padding: 0px;
+      transform: rotate(0deg) skew(0deg);
+
+      ion-icon {
+        position: absolute;
+        inset: 0;
+        width: 80px;
+        height: 100px;
+      }
+
+      & > div {
+        width: 70px;
+        position: absolute;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bolder;
+        font-size: 14px;
+        color: var(--ion-color-light);
+        text-align: center;
+      }
+    }
+
+    &__avatar {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+
+      img {
+        border-radius: 0;
+        height: 72px;
+        width: 190px;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+
+    &__label {
+      text-align: start;
+
+      p {
+        text-align: start;
+      }
+    }
+  }
+
+  .gold-sponsor,
+  .silver-sponsor,
+  .bronze-sponsor,
+  .normal-sponsor {
+    width: 100%;
+    padding: 0 0 7px 0;
+
+    &__bookmark{
+      align-self: flex-start;
+      position: relative;
+      margin: 0;
+      height: 100px;
+      width: 80px;
+      padding: 0px;
+      transform: rotate(0deg) skew(0deg);
+      border-bottom: 22px solid transparent;
+
+      ion-icon {
+        position: absolute;
+        inset: 0;
+        width: 80px;
+        height: 100px;
+      }
+
+      & > div {
+        width: 70px;
+        position: absolute;
+
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bolder;
+        font-size: 14px;
+        color: var(--ion-color-light);
+        text-align: center;
+      }
+    }
+
+    &__inner {
+      width: 100%;
+    }
+
+    &__avatar {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 84px;
+      max-width: max-content;
+
+      img {
+        border-radius: 0;
+        height: 80px;
+        width: 84px;
+        max-width: calc(100% - 4px);
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+
+    &__label {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: start;
+      width: calc(100% - 71px);
+      padding-left: 10px;
+
+      p {
+        text-align: start;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  .titleColors h2{
+    margin-top: 0;
+  }
+}

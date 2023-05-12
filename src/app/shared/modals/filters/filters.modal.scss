@@ -1,0 +1,123 @@
+ion-toolbar {
+  --background: rgba(var(--ion-color-congress-rgb), 0.9);
+}
+ion-content {
+  --background: var(--ion-color-congress-background-gradient-modals);
+}
+
+#filtersession-page {
+  .filtersession-page__grid {
+    height: 100%;
+
+    &__col {
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+    }
+
+    ion-label:first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  .item-accordion {
+    display: block;
+    padding-top: 0;
+  }
+
+  .ng-hide {
+    display: none;
+  }
+
+  ion-list {
+    --background: transparent;
+    background: transparent;
+    padding-top: 0;
+  }
+
+  h3 {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+  .items {
+    text-align: start;
+    --background: transparent;
+    background: transparent;
+    color: #fff;
+    margin: 8px 12px;
+  }
+
+  ion-checkbox {
+    --checkmark-color: var(--ion-color-congress);
+    --background-checked: var(--ion-color-congress-bis);
+    vertical-align: middle;
+    margin: 8px;
+  }
+
+  #filter {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 50px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    font-size: 28px;
+    color: var(--ion-color-light);
+    font-weight: bold;
+    padding: 20px;
+    text-align: start;
+    background: var(--ion-color-congress-ultralight);
+
+    @media screen and (max-width: 360px) {
+      font-size: 24px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--ion-color-light);
+      font-weight: bold;
+      z-index: 3;
+    }
+
+    &.filter {
+      .filter__icon {
+        position: absolute;
+        top: 14px;
+        right: 8px;
+        font-size: 50px;
+        opacity: 1;
+        color: var(--ion-color-light);
+        z-index: 2;
+      }
+    }
+  }
+
+  .img-bg {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    opacity: 0.5;
+  }
+
+  @for $i from 1 through 3 {
+    .filter-#{$i} {
+      position: relative;
+      background-repeat: no-repeat;
+      background-position: 0;
+      background-size: cover;
+      background-color: var(--ion-color-congress-ultralight);
+    }
+  }
+}

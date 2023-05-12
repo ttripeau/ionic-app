@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="deleteNote()" *ngIf="!isNew">
+        <ion-icon color="light" name="trash-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title color="light">{{ (isNew ? 'notes.add_note' : 'notes.edit_note') | translate }}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="valid()">
+        <ion-icon color="light" name="checkmark-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  <!-- RICH TEXT EDITOR -->
+  <app-rich-text-editor class="editor" [value]="data" (valueUpdated)="updateValue($event)"></app-rich-text-editor>
+</ion-content>

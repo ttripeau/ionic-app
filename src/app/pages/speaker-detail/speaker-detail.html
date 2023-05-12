@@ -1,0 +1,115 @@
+<app-return-header [text]="'global.back' | translate" [colorBtn]="'light'" [defaultHref]="(defaultHref !== '') ? defaultHref : '/app/tabs/speakers'">
+</app-return-header>
+
+<ion-content id="speaker-detail" class="speaker-detail">
+  <div class="about-header"></div>
+  <div *ngIf="speaker" class="profile-picture">
+    <app-avatar-initials
+      class="speaker-background"
+      [firstName]="speaker.firstName"
+      [lastName]="speaker.lastName"
+      [picture]="speaker.picture"
+      [avatarSize]="120"
+      [textSize]="48"
+      [hasMarginTop]="true"
+      (clicked)="showPictureFullScreen(speaker.picture)"
+    >
+    </app-avatar-initials>
+
+    <ion-label class="profile-picture__label" color="light">{{speaker.firstName}} {{speaker.lastName}}</ion-label>
+  </div>
+
+  <ion-row *ngIf="hasGoToChat">
+    <ion-col size="12" class="ion-padding ion-margin-top">
+      <app-horizontal-button
+        [icon]="{name: 'chatbubble-outline'}"
+        title="{{ 'speakers.go-to-chat.title' | translate }}"
+        text="{{ 'speakers.go-to-chat.content' | translate }} {{speaker?.firstName}} {{speaker?.lastName}}"
+        colorTitle="congress"
+        (clicked)="goToChat()"
+      >
+      </app-horizontal-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid *ngIf="speaker" class="ion-no-padding bottomSpacesGrid ion-margin-top">
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-bottom" *ngIf="(speaker && (speaker.institute || speaker.town || speaker.country))">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'speakers.infos.title' | translate}}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin infosG">
+              <div class="ion-padding">
+                <app-contact-detail [details]="details"></app-contact-detail>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="speaker?.biography" class="grid-no-padding-background ion-padding ion-no-padding-bottom">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'speakers.biography.title' | translate}}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin infosG">
+              <div class="ion-padding" [innerHtml]="formatBiography(speaker.biography)"></div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top" *ngIf="(speaker && speaker.interventions && (speaker.interventions.length > 0))">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'speakers.programme.title' | translate}}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <ion-list class="ion-no-margin ion-no-padding listeInterventions">
+                <ng-container *ngFor="let interv of speaker.interventions; let i = index">
+                  <ion-item
+                    *ngIf="
+                      speaker &&
+                      speaker.interventions &&
+                      speaker.interventions[i] &&
+                      (
+                        !speaker.interventions[i-1] ||
+                        (speaker.interventions[i].date !== speaker.interventions[i-1].date)
+                      )
+                    "
+                    lines="none"
+                  >
+                    <ion-icon color="congressultralight" name="calendar-outline"></ion-icon>&nbsp;
+                    <ion-label class="ion-text-wrap titleDayCalendar"> {{interv.date}} </ion-label>
+                  </ion-item>
+                  <app-session-item-intervention
+                    link="/app/tabs/programme/session/{{ interv.idDate ? interv.idDate : 0 }}/{{interv.idSession}}"
+                    [linkQueryParams]="{routeBack: '/app/tabs/speakers/speaker-details/' + (speaker && speaker.idSpeaker)}"
+                    [intervention]="interv"
+                    [border]="false"
+                    [hasFavorite]="true"
+                  >
+                  </app-session-item-intervention>
+                </ng-container>
+              </ion-list>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

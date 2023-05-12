@@ -1,0 +1,71 @@
+<ion-content class="introduction-page">
+  <div class="close" (click)="acceptIntroduction()">
+    <ion-icon name="close" color="light"></ion-icon>
+  </div>
+  <swiper
+    #swiper
+    class="ion-padding-bottom ion-no-padding-top mySwiper"
+    [virtual]="true"
+    [initialSlide]="config.initialSlide"
+    [slidesPerView]="config.slidesPerView"
+    [centeredSlides]="config.centeredSlides"
+    [autoplay]="config.autoplay"
+    [pagination]="{
+      clickable: true
+    }"
+    [grabCursor]="true"
+  >
+    <ng-template swiperSlide>
+      <div class="slide slide1 ion-padding-bottom">
+        <h1>{{'introduction.slide-1.title' | translate}}</h1>
+        <img src="/assets/img/logo_congres.png" />
+        <h2>{{'introduction.slide-1.content' | translate}}</h2>
+      </div>
+    </ng-template>
+
+    <!-- <ng-template swiperSlide>
+      <div class="slide slide2 ion-padding-bottom">
+        <ion-icon class="icon-logo" name="qr-code-outline" color="light"></ion-icon>
+        <h1>{{'introduction.slide-2.title' | translate}}</h1>
+        <h2>{{'introduction.slide-2.content' | translate}}</h2>
+      </div>
+    </ng-template> -->
+
+    <ng-template swiperSlide>
+      <div class="slide slide3 ion-padding-bottom">
+        <ion-icon class="icon-logo" name="calendar-outline" color="light"></ion-icon>
+        <h1>{{'introduction.slide-3.title' | translate}}</h1>
+        <h2>{{'introduction.slide-3.content' | translate}}</h2>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="slide slide4 ion-padding-bottom">
+        <ion-icon class="icon-logo" name="chatbox-ellipses-outline" color="light"></ion-icon>
+        <h1>{{'introduction.slide-4.title' | translate}}</h1>
+        <h2>{{'introduction.slide-4.content' | translate}}</h2>
+      </div>
+    </ng-template>
+
+    <!-- <ng-template swiperSlide>
+      <div class="slide slide5 ion-padding-bottom">
+        <ion-icon class="icon-logo" name="chatbubble-outline" color="light"></ion-icon>
+        <h1>{{'introduction.slide-5.title' | translate}}</h1>
+        <h2>{{'introduction.slide-5.content' | translate}}</h2>
+      </div>
+    </ng-template> -->
+
+    <ng-template swiperSlide>
+      <div class="slide slide6 ion-padding-bottom">
+        <ion-icon class="icon-logo" name="people-outline" color="light"></ion-icon>
+        <h1>{{'introduction.slide-6.title' | translate}}</h1>
+        <h2>{{'introduction.slide-6.content' | translate}}</h2>
+
+        <ion-button lines="none" (click)="acceptIntroduction()" class="cta" color="light">
+          <ion-label color="congress">{{ 'global.lets-go' | translate }}</ion-label>
+          <ion-icon slot="end" name="chevron-forward-outline" color="congress"></ion-icon>
+        </ion-button>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-content id="about-page">
+  <!-- <div class="about-main-header">
+    <app-main-header colorBtn="light"></app-main-header>
+  </div> -->
+  <div class="about-main-header">
+    <app-return-header
+      colorBtn="light"
+      colorTitle="light"
+      text="{{ 'global.back' | translate }}"
+      [positionAbsolute]="true"
+    ></app-return-header>
+  </div>
+
+  <!-- <div class="about-header">
+    <img class="logoHeader" [src]="templateConfig.logoHeader" />
+  </div> -->
+
+  <ion-grid class="ion-no-padding bottomSpacesGrid">
+    <ion-row class="grid-no-padding-background ion-padding">
+      <div class="app-text-info-html" *ngIf="text">
+        <app-text-info-html [text]="text"></app-text-info-html>
+      </div>
+      <!-- <ion-col size="12" class="about-header ion-padding-top">
+        <ion-row>
+          <ion-col size="10" offset="1">
+            <ion-button expand="block" (click)="openURL(appConfig.links?.practicalInfo)" [color]="templateConfig.buttonBgColor">
+              <ion-icon [color]="templateConfig.buttonTxtColor" name="globe" slot="start"></ion-icon>
+              <ion-label [color]="templateConfig.buttonTxtColor">{{ 'about.buttons.toJNLF' | translate }}</ion-label>
+            </ion-button>
+          </ion-col>
+          <ion-col size="10" offset="1">
+            <ion-button expand="block" (click)="openURL(appConfig.links?.remotePracticalInformation)" [color]="templateConfig.buttonBgColor">
+              <ion-icon [color]="templateConfig.buttonTxtColor" name="information-circle" slot="start"></ion-icon>
+              <ion-label [color]="templateConfig.buttonTxtColor">{{ 'about.buttons.remotePracticalInformation' | translate }}</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col> -->
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col size="12" class="titleColors ion-no-padding-top">
+              <h1>{{ 'about.title' | translate }}</h1>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12">
+              <div class="ion-padding" [innerHTML]="textContent"></div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

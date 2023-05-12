@@ -1,0 +1,19 @@
+<app-return-header
+  colorBg="congress"
+  colorBtn="light"
+  [text]="'global.back' | translate"
+  icon="chevron-back-outline"
+  defaultHref="/app/tabs/home"
+  [positionAbsolute]="false"
+>
+</app-return-header>
+
+<ion-content [scrollY]="false">
+
+  <iframe
+    *ngIf="eventslido"
+    [src]="eventslido"
+    >
+  </iframe>
+
+</ion-content>

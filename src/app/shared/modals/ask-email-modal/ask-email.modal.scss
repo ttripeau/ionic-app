@@ -1,0 +1,9 @@
+ion-toolbar {
+  background: rgba(var(--ion-color-congress-rgb), .8);
+  --background: transparent;
+}
+ion-content {
+  --background: transparent;
+  --background: var(--ion-color-congress-background-gradient-modals);
+  background: var(--ion-color-congress-background-gradient-modals);
+}

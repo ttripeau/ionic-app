@@ -1,0 +1,614 @@
+<app-main-header
+  [colorBg]="headerChangeColor  ? undefined : undefined"
+  [colorBtn]="headerChangeColor ? 'light' : 'light'"
+></app-main-header>
+
+<ion-content *ngIf="!isScanning && appConfig" id="home-page" [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <div class="backgroundFixed" class="ion-no-padding"></div>
+
+  <div *ngIf="appConfig?.pages?.home?.showLogoInBottomBorders && templateConfig?.logoHeader" class="about-header logo">
+    <img class="logo-header" [src]="templateConfig.logoHeader" />
+  </div>
+
+  <div *ngIf="!appConfig?.pages?.home?.showLogoInBottomBorders && templateConfig?.logoHeader" class="about-header">
+    <img class="logo-header" [src]="templateConfig.logoHeader" />
+  </div>
+
+  <ion-row *ngIf="appConfig?.pages?.home?.showSlider || appConfig?.pages?.home?.showUniqueSlide" class="ion-padding ion-padding-bottom">
+    <ion-col size="12" class="ion-no-padding">
+      <img
+        *ngIf="appConfig?.pages?.home?.showUniqueSlide"
+        class="custom-border-radius"
+        src="assets/img/slides/slide-1.jpg"
+        (click)="openUniqueSlide()"
+      />
+      <app-slider-sponsor
+        *ngIf="appConfig?.pages?.home?.showSlider && templateConfig?.slides"
+        [slides]="templateConfig.slides"
+      ></app-slider-sponsor>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid class="ion-no-padding contentHome bottomSpacesGrid">
+    <ion-row>
+      <ion-col size="12">
+        <div class="about-header">
+          <div class="toolbarFilters">
+            <ion-row class="ion-padding-bottom ion-padding-horizontal">
+              <ion-col class="ion-no-padding" size="5.75" offset="0">
+                <!-- <app-vertical-button
+                  className="light"
+                  (clicked)="openModalInteractiviteList()"
+                  [icon]="{name: 'school-outline'}"
+                  title="{{ 'home.buttons.join_chat' | translate }}"
+                  text="{{ 'home.buttons.interact' | translate }}"
+                  id="interact"
+                >
+                </app-vertical-button> -->
+
+                <app-vertical-button
+                  className="congressultralight PCR happening-now"
+                  (clicked)="openModalHappeningNow()"
+                  [icon]="{src: '/assets/icon/stopwatch-outline.svg'}"
+                  title="{{ 'home.buttons.happening-now-title' | translate }}"
+                  text="{{ textHappeningNow }}"
+                >
+                </app-vertical-button>
+              </ion-col>
+
+              <ion-col class="ion-no-padding" size="5.75" offset="0.5">
+                <app-vertical-button
+                  className="light"
+                  (clicked)="goToMap()"
+                  [icon]="{name: 'map-outline'}"
+                  title="{{ 'home.buttons.map' | translate }}"
+                  text="{{ 'home.buttons.interactive-map' | translate }}"
+                >
+                </app-vertical-button>
+
+                <!-- <app-vertical-button
+                  className="light"
+                  (clicked)="openModalPracticalInformation()"
+                  [icon]="{name: 'information-circle-outline'}"
+                  title="{{ 'home.buttons.about-title' | translate }}"
+                  text="{{ 'home.buttons.about-text' | translate }}"
+                >
+                </app-vertical-button> -->
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row class="ion-padding ion-padding-bottom ion-justify-content-center">
+      <ion-col size="6">
+        <ion-button expand="block" (click)="goToInteractivity()" color="congressultralight">
+          <ion-icon slot="start" [src]="'assets/icon/comments-duotone.svg'"></ion-icon>
+          {{ 'home.buttons.join_chat' | translate }}
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button expand="block" (click)="openProgramme()" color="congressultralight">
+          <ion-icon slot="start" name="calendar-outline"></ion-icon>
+          {{ 'home.buttons.programme' | translate }}
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button expand="block" (click)="goToMap()" color="congressultralight">
+          <ion-icon slot="start" name="map-outline"></ion-icon>
+          {{ 'home.buttons.map' | translate }}
+        </ion-button>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row *ngIf="appConfig?.pages?.home?.showBadge && isBadgeButtonDisplayed">
+      <ion-col size="12" class="ion-padding-horizontal ion-margin-vertical">
+        <app-horizontal-button
+          (clicked)="displayBadge()"
+          [icon]="{name: 'qr-code-outline'}"
+          title="{{ 'badge.button' | translate }}"
+          text="{{ 'badge.button-title' | translate }}"
+          colorTitle="congress"
+        >
+        </app-horizontal-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-row>
+              <ion-col size="9" class="titleColors">
+                <h2>
+                  <ion-icon item-start name="heart" class="my-sessions-icon"></ion-icon>
+                  {{'tabs.messessions' | translate}}
+                </h2>
+              </ion-col>
+              <ion-col size="3" class="ion-text-right see-all">
+                <a
+                  class="textLink see-all__link"
+                  routerLink="/app/tabs/mes-sessions"
+                  routerLinkActive="active"
+                  routerDirection="root"
+                  detail="false"
+                >
+                  {{ 'global.voirtout' | translate }}
+                </a>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12">
+              <ion-list class="ion-no-padding" lines="none">
+                <ion-item *ngIf="!favoritesSessions?.length">
+                  <ion-label class="ion-text-wrap">
+                    <h2>
+                      {{'home.no-session-currently-my-programme' | translate}}
+                      <ion-icon name="heart" size="small" class="my-sessions-icon"></ion-icon>
+                      {{'home.no-session-currently-my-programme-end' | translate}}
+                    </h2>
+                  </ion-label>
+                </ion-item>
+                <ion-item
+                  *ngFor="let oneSessionToShow of favoritesSessions"
+                  routerLink="/app/tabs/programme/session/{{oneSessionToShow.idDate}}/{{oneSessionToShow.idSession}}"
+                  [queryParams]="{routeBack: '/app/tabs/home'}"
+                  [detail]="true"
+                  routerLinkActive="active"
+                  routerDirection="root"
+                  expand="block"
+                >
+                  <ion-label class="ion-text-wrap">
+                    <h2>{{oneSessionToShow ? oneSessionToShow.title : translate.instant('home.no-session-currently')}}</h2>
+                    <p class="ion-small-padding" *ngIf="oneSessionToShow.sentence">
+                      <ion-text> {{oneSessionToShow.sentence}} </ion-text>
+                    </p>
+                    <p class="ion-small-padding fix-alignment" *ngIf="oneSessionToShow.room">
+                      <ion-icon [color]="'congress'" src="assets/icon/icon_presentation_light.svg" slot="start"></ion-icon>
+                      <ion-text> {{oneSessionToShow.room}} </ion-text>
+                    </p>
+                    <p class="ion-small-padding" *ngIf="!oneSessionToShow.room">&nbsp;</p>
+                    <ion-progress-bar
+                      *ngIf="oneSessionToShow.decalage <= 0 && oneSessionToShow.decalageMins <= 0"
+                      color="congressultralight"
+                      value="{{oneSessionToShow.progress}}"
+                    ></ion-progress-bar>
+                    <p *ngIf="oneSessionToShow.decalage <= 0 && oneSessionToShow.decalageMins < 0" class="ion-text-right">
+                      {{'home.left-minutes' | translate:{'minutes': (oneSessionToShow.decalage | abs)} }}
+                    </p>
+
+                    <ion-progress-bar
+                      *ngIf="oneSessionToShow.decalage > 0 || oneSessionToShow.decalageMins > 0"
+                      color="congressultralight"
+                      value="0"
+                    ></ion-progress-bar>
+                    <p *ngIf="oneSessionToShow.decalageDays > 0" class="ion-text-right">
+                      {{'home.bientot.commenceDans'|translate:{'nombreJours': oneSessionToShow.decalageDays} }}
+                    </p>
+                    <p *ngIf="oneSessionToShow.decalageHours > 0 && oneSessionToShow.decalageDays === 0" class="ion-text-right">
+                      {{'home.bientot.commenceDansHeures'|translate:{'nombreHeures': oneSessionToShow.decalageHours} }}
+                    </p>
+                    <p
+                      *ngIf="oneSessionToShow.decalageMins > 0 && oneSessionToShow.decalageHours === 0 && oneSessionToShow.decalageDays === 0"
+                      class="ion-text-right"
+                    >
+                      {{'home.bientot.commenceDansMins'|translate:{'nombreMins': oneSessionToShow.decalageMins} }}
+                    </p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-row>
+              <ion-col size="12" class="titleColors">
+                <h2 *ngIf="isCurrent === 'before'">{{'home.bientot.title' | translate }}</h2>
+                <h2 *ngIf="isCurrent === 'current'">{{ 'home.enCeMoment.title' | translate }}</h2>
+                <h2 *ngIf="isCurrent === 'after'">{{ 'home.enCeMoment.title' | translate }}</h2>
+              </ion-col>
+              <!- <ion-col size="5.5" class="ion-text-right see-all">
+                <a
+                  class="textLink see-all__link"
+                  routerLink="/app/tabs/programme/"
+                  routerLinkActive="active"
+                  routerDirection="root"
+                  detail="false"
+                >
+                  {{ 'home.enCeMoment.see-all' | translate }}
+                </a>
+              </ion-col> ->
+            </ion-row>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12">
+              <ion-list class="ion-no-padding" lines="none">
+                <ion-item *ngIf="!sessionsHTML?.length">
+                  <ion-label class="ion-text-wrap">
+                    <h2>{{'home.no-session-currently' | translate}}</h2>
+                  </ion-label>
+                </ion-item>
+                <ion-item
+                  *ngFor="let oneSessionToShow of sessionsHTML"
+                  routerLink="/app/tabs/programme/session/{{oneSessionToShow.idDate}}/{{oneSessionToShow.idSession}}"
+                  [queryParams]="{routeBack: '/app/tabs/home'}"
+                  [detail]="true"
+                  routerLinkActive="active"
+                  routerDirection="root"
+                  expand="block"
+                >
+                  <ion-label class="ion-text-wrap">
+                    <h2>{{oneSessionToShow ? oneSessionToShow.title : translate.instant('home.no-session-currently') }}</h2>
+                    <p class="ion-small-padding">
+                      <ion-text> {{oneSessionToShow.sentence}} </ion-text>
+                    </p>
+                    <p class="ion-small-padding fix-alignment">
+                      <ion-icon [color]="'congress'" src="assets/icon/icon_presentation_light.svg" slot="start"></ion-icon>
+                      <ion-text> {{oneSessionToShow.room}} </ion-text>
+                    </p>
+
+                    <p class="ion-small-padding" *ngIf="!oneSessionToShow.room">&nbsp;</p>
+                    <ion-progress-bar
+                      *ngIf="oneSessionToShow.decalage <= 0 && oneSessionToShow.decalageMins <= 0"
+                      color="congressultralight"
+                      value="{{oneSessionToShow.progress}}"
+                    ></ion-progress-bar>
+                    <p *ngIf="oneSessionToShow.decalage <= 0 && oneSessionToShow.decalageMins <= 0" class="ion-text-right">
+                      {{'home.left-minutes' | translate:{'minutes': (oneSessionToShow.decalage | abs)} }}
+                    </p>
+
+                    <ion-progress-bar
+                      *ngIf="oneSessionToShow.decalage > 0 || oneSessionToShow.decalageMins > 0"
+                      color="congressultralight"
+                      value="0"
+                    ></ion-progress-bar>
+                    <p *ngIf="oneSessionToShow.decalageDays && oneSessionToShow.decalageDays > 0" class="ion-text-right">
+                      {{'home.bientot.commenceDans'|translate:{'nombreJours': oneSessionToShow.decalageDays} }}
+                    </p>
+                    <p *ngIf="oneSessionToShow.decalageHours > 0 && oneSessionToShow.decalageDays === 0" class="ion-text-right">
+                      {{'home.bientot.commenceDansHeures'|translate:{'nombreHeures': oneSessionToShow.decalageHours} }}
+                    </p>
+                    <p
+                      *ngIf="oneSessionToShow.decalageMins > 0 && oneSessionToShow.decalageHours === 0 && oneSessionToShow.decalageDays === 0"
+                      class="ion-text-right"
+                    >
+                      {{'home.bientot.commenceDansMins'|translate:{'nombreMins': oneSessionToShow.decalageMins} }}
+                    </p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row
+      *ngIf="appConfig?.pages?.home?.showSpeakers"
+      class="grid-no-padding-background ion-padding ion-no-padding-top ion-no-padding-bottom"
+    >
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-row>
+              <ion-col size="6" class="titleColors">
+                <h2>{{ 'home.buttons.speakers' | translate }}</h2>
+              </ion-col>
+              <ion-col size="6" class="ion-text-right see-all">
+                <a
+                  class="textLink see-all__link"
+                  routerLink="/app/tabs/speakers"
+                  routerLinkActive="active"
+                  routerDirection="root"
+                  detail="false"
+                >
+                  {{ 'global.voirtout' | translate }}
+                </a>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12">
+              <div class="scrolling-wrapper ion-padding-vertical">
+                <a
+                  routerLink="/app/tabs/speakers/speaker-details/{{oneSpeakersToShow.idSpeaker}}"
+                  routerLinkActive="active"
+                  [queryParams]="{routeBack: '/app/tabs/home'}"
+                  routerDirection="root"
+                  detail="false"
+                  class="card speakersLink"
+                  *ngFor="let oneSpeakersToShow of speakersToShow"
+                >
+                  <app-avatar-initials
+                    class="ion-margin-bottom"
+                    [firstName]="oneSpeakersToShow?.firstName"
+                    [lastName]="oneSpeakersToShow?.lastName"
+                    [picture]="oneSpeakersToShow?.picture"
+                    [avatarSize]="60"
+                    [textSize]="26"
+                  >
+                  </app-avatar-initials>
+                  <p class="speakerNames">
+                    {{oneSpeakersToShow.firstName}}
+                    <br />
+                    {{oneSpeakersToShow.lastName}}
+                  </p>
+                </a>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row
+      *ngIf="appConfig?.pages?.home?.showOnlyWebsite && dataConfig?.socialnetworks?.website"
+      class="grid-no-padding-background ion-padding ion-no-padding-top ion-margin-bottom"
+    >
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col size="12" class="titleColors">
+              <h2>{{ 'home.networks.title' | translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12">
+              <p class="website-access ion-padding" [innerHtml]="'home.networks.access' | translate"></p>
+              <div class="ion-padding">
+                <a [href]="dataConfig.socialnetworks.website" target="_blank" rel="noopener noreferrer" style="text-decoration: none">
+                  <app-horizontal-button
+                    colorBg="congressultralight"
+                    colorText="light"
+                    colorTitle="light"
+                    colorIcon="light"
+                    colorChevron="light"
+                    [icon]="{name: 'logo-facebook'}"
+                    title="{{'home.networks.button' | translate}}"
+                  >
+                  </app-horizontal-button>
+                </a>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="appConfig?.pages?.home?.showAllSocialNetworks" class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col size="12" class="titleColors">
+              <h2>{{ 'home.networks.title' | translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <p *ngIf="'home.networks.access' | translate" class="website-access" [innerHtml]="'home.networks.access' | translate"></p>
+                <ion-list class="ion-no-padding" expand="block" mode="ios">
+                  <!-- <ion-item (click)="clickNews()" [detail]="true" expand="block">
+                    <ion-icon slot="start" name="bulb-outline" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'tabs.news' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item (click)="clickYouthSpecial()" [detail]="true" expand="block">
+                    <ion-icon slot="start" src="assets/icon/child-outline.svg" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'tabs.youth-special' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    routerLink="/app/tabs/programme/vod"
+                    routerLinkActive="active"
+                    routerDirection="root"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="play-circle-outline" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'tabs.vod' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    (click)="openUrl(dataConfig.socialnetworks.replay)"
+                    *ngIf="dataConfig?.socialnetworks?.replay"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="play-back-circle-outline" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'tabs.replay' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    routerLink="/app/tabs/custom-page/neuroquiz"
+                    routerLinkActive="active"
+                    routerDirection="root"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="trophy-outline" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'tabs.neuroquiz' | translate}}</h2>
+                    </ion-label>
+                  </ion-item> -->
+
+                  <ion-item
+                    (click)="openUrl(dataConfig.socialnetworks.website)"
+                    *ngIf="dataConfig?.socialnetworks?.website"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="globe-outline" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'home.networks.website' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <!-- <ion-item (click)="openUrl(appConfig.registrationUrl)" *ngIf="appConfig?.registrationUrl" [detail]="true" expand="block">
+                    <ion-icon slot="start" name="log-in-outline" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'tabs.registration' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item routerLink="/app/tabs/about" routerLinkActive="active" routerDirection="root" [detail]="true" expand="block">
+                    <ion-icon slot="start" name="information-circle-outline" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'tabs.practical-infos' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    routerLink="/app/tabs/custom-page/certificate-attendance"
+                    routerLinkActive="active"
+                    routerDirection="root"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" src="assets/icon/file-certificate-outline.svg" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'tabs.certificateAttendance' | translate}}</h2>
+                    </ion-label>
+                  </ion-item> -->
+
+                  <ion-item
+                    (click)="openUrl(dataConfig.socialnetworks.platform)"
+                    *ngIf="dataConfig?.socialnetworks?.platform"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="code-slash-outline" color="dark"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'home.networks.platform' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    (click)="openUrl(dataConfig.socialnetworks.facebook)"
+                    *ngIf="dataConfig?.socialnetworks?.facebook"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="logo-facebook" color="facebook"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">Facebook</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    (click)="openUrl(dataConfig.socialnetworks.twitter)"
+                    *ngIf="dataConfig?.socialnetworks?.twitter"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="logo-twitter" color="twitter"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">Twitter</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    (click)="openUrl(dataConfig.socialnetworks.linkedin)"
+                    *ngIf="dataConfig?.socialnetworks?.linkedin"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="logo-linkedin" color="linkedin"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">Linkedin</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    (click)="openUrl(dataConfig.socialnetworks.youtube)"
+                    *ngIf="dataConfig?.socialnetworks?.youtube"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="logo-youtube" color="youtube"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">Youtube</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item
+                    (click)="openUrl(dataConfig.socialnetworks.instagram)"
+                    *ngIf="dataConfig?.socialnetworks?.instagram"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-icon slot="start" name="logo-instagram" color="instagram"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">Instagram</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item (click)="openUrl(appConfig.links?.vod)" *ngIf="appConfig?.links?.vod" [detail]="true" expand="block">
+                    <ion-icon slot="start" name="play-circle-outline" color="congressultralight"></ion-icon>
+                    <ion-label>
+                      <h2 class="societeName">{{'home.networks.vod' | translate}}</h2>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="appConfig?.pages?.home?.showEntities" class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col size="12" class="titleColors">
+              <h2>{{ 'home.entities.title' | translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-padding">
+                <ion-list class="ion-no-padding" expand="block" mode="ios">
+                  <ion-item
+                    *ngFor="let entity of dataConfig?.entities ?? []"
+                    (click)="openEntityUrl(entity.link)"
+                    [detail]="true"
+                    expand="block"
+                  >
+                    <ion-img
+                      slot="start"
+                      [src]="entity.icon?.src"
+                      color="congressultralight"
+                      style="max-height: 50px; max-width: 50px"
+                    ></ion-img>
+                    <ion-label>
+                      <h2 class="societeName">{{entity.label}}</h2>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

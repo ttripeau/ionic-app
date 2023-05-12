@@ -1,0 +1,18 @@
+ion-content {
+  --background: var(--ion-color-congress-splash-background-gradient);
+}
+
+ion-content::part(scroll) {
+  padding-top: 0;
+}
+
+.splash-grid {
+  height: 100%;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+}

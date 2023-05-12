@@ -1,0 +1,113 @@
+/*
+ * Android Only
+ */
+
+#aproposDePage::part(scroll) {
+  padding-top: 22px;
+}
+
+#aproposDePage {
+
+  .about-header {
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    .logo-header {
+      margin: calc(60px + var(--ion-safe-area-top)) auto 20px auto;
+      width: 70%;
+      max-width: 340px;
+    }
+
+    &.logo {
+      z-index: 9;
+      background: var(--ion-color-congress-bis);
+      padding-bottom: 20px;
+      padding-top: 20px;
+      margin-bottom: 40px;
+      border-radius: 0 0 25% 25%;
+    }
+  }
+  // .about-header .about-image {
+  //   position: absolute;
+
+  //   top: 0;
+  //   left: 0;
+  //   bottom: 0;
+  //   right: 0;
+
+  //   background-position: center;
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
+
+  //   opacity: 0;
+
+  //   transition: opacity 500ms ease-in-out;
+  // }
+
+  .about-info h3 {
+    margin-top: 0;
+  }
+
+  .about-info ion-list {
+    padding-top: 0;
+  }
+
+  .about-info p {
+    line-height: 130%;
+
+    color: var(--ion-color-dark);
+  }
+
+  .about-info ion-icon {
+    margin-inline-end: 32px;
+  }
+
+  /*
+  * iOS Only
+  */
+
+  .ios .about-info {
+    --ion-padding: 19px;
+  }
+
+  .ios .about-info h3 {
+    font-weight: 700;
+    color: red;
+  }
+
+  ion-card-content {
+    h2 {
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 20px;
+      color: var(--ion-color-congress-ultralight);
+      text-transform: uppercase;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 10px 0;
+      color: #000000;
+    }
+
+    .firstOne {
+      margin-top: 0;
+    }
+
+    .text-highlight {
+      color: var(--ion-color-congress);
+    }
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    height: 50px;
+  }
+}

@@ -1,0 +1,12 @@
+<div class="rich-text-editor-container">
+  <quill-editor
+    class="content-editor"
+    [placeholder]="''"
+    [(ngModel)]="value.html"
+    (onContentChanged)="contentUpdated($event)"
+    (onEditorCreated)="setFocus($event)"
+    [modules]="modules"
+    [styles]="{ height }"
+  >
+  </quill-editor>
+</div>

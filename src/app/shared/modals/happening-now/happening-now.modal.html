@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon color="light" name="close-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="hero-banner">
+    <img src="/assets/img/main-arena.png" />
+  </div>
+  <div class="title">
+    <ion-icon class="ion-padding-start" color="congressbis" src="/assets/icon/stopwatch-outline.svg"></ion-icon>
+    <h2 class="ion-padding-start">{{'happening-now.title' | translate}}</h2>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let session of sessions" (click)="goToSession(session)">
+      <ion-row size="12" class="ion-align-items-center ion-padding-bottom" lines="full">
+        <ion-col size="4">
+          <h3>{{ session.room }}</h3>
+        </ion-col>
+        <ion-col size="7">
+          <p>{{ session.title }}</p>
+          <div class="time">
+            <div>{{session.timeBegin}}</div>
+            <div class="progress">
+              <ion-progress-bar class="ion-margin-top" color="congressbis" value="{{session.progress}}"></ion-progress-bar>
+            </div>
+            <div>{{session.timeEnd}}</div>
+          </div>
+          <div *ngIf="session.decalage <= 0 && session.decalageMins <= 0" class="ion-text-right">
+            {{'home.left-minutes' | translate:{'minutes': (session.decalage)} }}
+          </div>
+          <div *ngIf="session.decalageDays && session.decalageDays > 0" class="ion-text-right">
+            {{'home.bientot.commenceDans'|translate:{'nombreJours': session.decalageDays} }}
+          </div>
+          <div *ngIf="session.decalageHours > 0 && session.decalageDays === 0" class="ion-text-right">
+            {{'home.bientot.commenceDansHeures'|translate:{'nombreHeures': session.decalageHours} }}
+          </div>
+          <div *ngIf="session.decalageMins > 0 && session.decalageHours === 0 && session.decalageDays === 0" class="ion-text-right">
+            {{'home.bientot.commenceDansMins'|translate:{'nombreMins': session.decalageMins} }}
+          </div>
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon *ngIf="showInteractive(session)" (click)="goToInteractivity($event, session)" color="light" name="chatbox-ellipses"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header class="header ion-no-border">
+  <ion-toolbar
+    class="toolbar ion-no-border"
+    [ngStyle]="{position: view === 'LIST' ? 'absolute' : 'relative'}"
+    [ngClass]="{filter: view === 'PLAN', basic: view === 'LIST'}"
+  >
+    <ion-buttons slot="start">
+      <ion-menu-button [color]="menuButtonColor" autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-toolbar class="toolbar toolbar__custom" mode="ios">
+      <ion-segment class="toolbar__tabs" [(ngModel)]="view" (ngModelChange)="valueChanged($event)">
+        <ion-segment-button value="LIST"> {{'exhibitors.list' | translate}} </ion-segment-button>
+        <ion-segment-button value="PLAN"> {{'exhibitors.map' | translate}} </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <!-- <ion-buttons slot="end" class="toolbar-buttons-end">
+      <ion-button *ngIf="view === 'PLAN'" fill="clear" [color]="menuButtonColor" class="ion-no-padding" (click)="search()">
+        <ion-icon name="search" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="list" *ngIf="view === 'LIST'">
+  <app-exhibitors></app-exhibitors>
+</ion-content>
+
+<ion-content class="plan" *ngIf="view === 'PLAN'">
+  <app-map
+    [searchEnabled]="searchEnabled"
+    [coordonates]="coordonates"
+    [zoom]="zoom"
+    (modalClosed)="modalClosed()"
+    (centerChanged)="centerChanged($event)"
+    (zoomChanged)="zoomChanged($event)"
+  ></app-map>
+</ion-content>

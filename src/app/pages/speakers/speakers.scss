@@ -1,0 +1,125 @@
+ion-tab-bar {
+  display: none !important;
+}
+
+.speaker-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Due to the fact the cards are inside of columns the margins don't overlap
+ * properly so we want to remove the extra margin between cards
+ */
+ion-col:not(:last-of-type) .speaker-card {
+  margin-bottom: 0;
+}
+
+.speaker-card .speaker-item {
+  --min-height: 85px;
+}
+
+.speaker-card .speaker-item h2 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.toolbarAppMain {
+  min-height: 64px;
+}
+
+.mainHeaderSpeakers .toolbarAppMain .buttonsUserChat ion-button::part(native){
+  overflow: visible;
+}
+
+#speaker-list {
+  .profilePic {
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--ion-color-congress-profile-picture);
+  }
+}
+
+.speaker-card .speaker-item p {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.speaker-card ion-card-header {
+  padding: 0;
+}
+
+.speaker-card ion-card-content {
+  flex: 1 1 auto;
+
+  padding: 0;
+}
+
+.ios ion-list {
+  margin-bottom: 10px;
+}
+
+.md ion-list {
+  border-top: 1px solid var(--ion-color-step-150, #d7d8da);
+
+  padding: 0;
+}
+
+#exposants-list-page {
+  ion-list{
+
+    ion-avatar {
+      width: 20%;
+      height: 100%;
+
+      img {
+        border-radius: 0;
+        max-height: 50px;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+
+  .about-header {
+
+    position: relative;
+    width: 100%;
+    height: 320px;
+
+    .about-image {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      opacity: 0;
+
+      transition: opacity 500ms ease-in-out;
+    }
+  }
+}
+
+.ios {
+  ion-content {
+    --padding-top: 0px !important;
+  }
+}
+
+.android {
+  ion-content {
+    --padding-top: 0px !important;
+  }
+}
+
+.speaker-searchbar {
+  background: #fff;
+  --cancel-button-color: var(--ion-color-dark)
+}

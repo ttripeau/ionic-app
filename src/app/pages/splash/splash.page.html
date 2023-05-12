@@ -1,0 +1,18 @@
+<ion-content>
+  <ion-grid class="ion-text-center splash-grid">
+    <ion-row class="splash-grid__row">
+      <ion-col *ngIf="!appConfig?.splash" size="12">
+        <ion-spinner color="light"></ion-spinner>
+        <br />
+        <ion-label color="light">{{'global.loading' | translate}}</ion-label>
+      </ion-col>
+      <ion-col *ngIf="appConfig?.splash" size="12" (click)="handleSplashClick()">
+        <img [src]="this.splash && this.splash.src + '-portrait.png'" class="splash-picture-portrait">
+        <!-- <img [src]="getSrc() + '-portrait.jpg'" class="splash-picture-landscape"> -->
+      </ion-col>
+      <ion-col *ngIf="appConfig?.splash" size="12">
+        <ion-progress-bar color="congressultralight" type="indeterminate"></ion-progress-bar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

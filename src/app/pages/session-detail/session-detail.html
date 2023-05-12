@@ -1,0 +1,415 @@
+<app-return-header
+  colorBtn="light"
+  [text]="'global.back' | translate"
+  [defaultHref]="(defaultHref !== '') ? defaultHref : '/app/tabs/programme'"
+  [hasFavorite]="session && session.doIAppear ? false : (!!session && !isVod)"
+  [hasAddToMySession]="true"
+  [isFavorite]="session && session.isfavorite ?? false"
+  (addFavorite)="addFavorite()"
+  (removeFavorite)="removeFavorite()"
+  (clickAddToMyCalendar)="openAddToMyCalendar()"
+>
+</app-return-header>
+
+<ion-content id="speaker-detail" class="speaker-detail">
+  <app-add-to-my-calendar
+    [session]="session"
+    [isOpen]="showAddToMyCalendar"
+    (closeModal)="showAddToMyCalendar = false;"
+  ></app-add-to-my-calendar>
+  <!-- <div class="about-header">
+    <img class="logoHeader" [src]="templateConfig.logoHeaderBg" />
+  </div> -->
+
+  <div class="about-header-text">
+    <div class="ion-padding-horizontal">
+      <app-text-info-html *ngIf="isVod && text" [text]="text"></app-text-info-html>
+    </div>
+    <ion-row
+      *ngIf="appConfig.pages?.sessionDetail?.mainSponsor?.name && getInlineSponsor(session?.sponsors).toLocaleLowerCase()?.includes(appConfig.pages.sessionDetail.mainSponsor.name)"
+      class="ion-padding ion-no-padding-top"
+    >
+      <ion-col
+        size="12"
+        [routerLink]="appConfig.pages.sessionDetail.mainSponsor.route"
+        routerLinkActive="active"
+        routerDirection="root"
+        expand="block"
+        (click)="clickAd()"
+        class="ion-no-padding"
+      >
+        <img class="ion-no-padding ion-no-margin custom-border-radius" [src]="getMainSponsor()" />
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-padding"></ion-row>
+    <ion-row class="ion-padding"></ion-row>
+
+    <ion-row class="ion-padding ion-no-padding-top">
+      <ion-col class="titleColors" size="12" *ngIf="session">
+        <h1>
+          <!-- <ng-container *ngIf="session?.reference">{{session.reference}} - </ng-container> -->
+          {{ session.title }}
+        </h1>
+      </ion-col>
+
+      <ion-col class="titleColors" size="12" *ngIf="session?.sponsored">
+        <h3 class="subtitle">{{ session.sponsored }}</h3>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- <div *ngIf="hasInteractivity" class="about-header">
+    <div class="toolbarFilters">
+      <ion-row class="ion-padding">
+        <ion-col size="6" offset="3">
+          <ion-button
+            expand="block"
+            (click)="goToInteractivity()"
+            [color]="templateConfig.buttonBgColor" class="ion-text-uppercase"
+            >
+            {{ 'session.ask-your-questions' | translate }}
+            <ion-icon [color]="templateConfig.buttonTxtColor" name="chatbox-ellipses-outline" slot="start"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div> -->
+
+  <ion-row *ngIf="session?.idExhibitor" class="ion-no-padding">
+    <ion-col size="12" class="ion-padding">
+      <app-horizontal-button
+        (clicked)="displayExhibitor(session)"
+        [icon]="{src: 'assets/icon/store-outline.svg'}"
+        colorTitle="congress"
+        title="{{ 'session.exhibitor-button.title' | translate }}"
+        text="{{ 'session.exhibitor-button.content' | translate }} {{ session && session.sponsors && session.sponsors[0] && session.sponsors[0].title }}"
+      >
+      </app-horizontal-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="session?.replayURL" class="ion-no-padding">
+    <ion-col size="12" class="ion-padding-horizontal ion-margin-vertical">
+      <app-horizontal-button
+        (clicked)="openReplayUrl(session)"
+        [icon]="{name: 'play-back-circle-outline'}"
+        title="{{ 'session.replay' | translate }}"
+        colorTitle="congress"
+      >
+      </app-horizontal-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid class="ion-no-padding bottomSpacesGrid">
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'session.infos.title' | translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin infosG">
+              <div *ngIf="session" class="ion-padding">
+                <app-contact-detail [details]="details" (clickItem)="handleClick($event)"> </app-contact-detail>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="session?.doIAppear && guestComments.length > 0" class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ 'session.guest-comment.title' | translate }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin ion-pading-vertical ion-margin-vertical">
+              <div *ngFor="let comment of guestComments" class="ion-padding guestComment" [innerHTML]="comment"></div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top" *ngIf="session?.specificMessage">
+      <ion-col class="titleColors" size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{'session.to-know-more.title' |translate}}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div class="ion-no-padding ion-padding-vertical ion-padding-end">
+                <p class="ion-padding ion-color-black">{{session.specificMessage}}</p>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row
+      *ngIf="session?.objectiveSentence && session?.objectives?.length ?? 0 > 0"
+      class="grid-no-padding-background ion-padding ion-no-padding-top"
+    >
+      <ion-col class="titleColors" size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{'session.objectives.title' |translate}}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <!-- <div class="ion-padding" *ngFor="let objective of session?.objectives" [innerHTML]="objective"></div> -->
+              <div class="ion-no-padding ion-padding-vertical ion-padding-end">
+                <b *ngIf="session?.objectiveSentence" class="ion-padding ion-color-black"> {{session.objectiveSentence}} </b>
+                <ul>
+                  <li *ngFor="let objective of session?.objectives">{{objective}}</li>
+                </ul>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="session?.otherLink" class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">&nbsp;</ion-col>
+      <ion-col size="12">
+        <app-horizontal-button
+          colorTitle="congress"
+          colorIcon="congress"
+          colorChevron="congress"
+          title="{{ 'session.related-publication' | translate }}"
+          [icon]="{name: 'link-outline'}"
+          (clicked)="openOtherLink()"
+        ></app-horizontal-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="showRating()" class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-row>
+              <ion-col class="titleColors ion-no-padding-top" size="9">
+                <h2>{{ 'session.rate.title' | translate }}</h2>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <app-rating [value]="rating" (changeRate)="handleChangeRating($event)" (removeRate)="handleRemoveRating()"></app-rating>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-row>
+              <ion-col class="titleColors ion-no-padding-top" size="6">
+                <h2>{{ 'notes.title' | translate }}</h2>
+              </ion-col>
+
+              <ion-col size="6" class="ion-text-right ion-align-self-center">
+                <app-small-button
+                  (clicked)="addNote()"
+                  text="{{ note === null ? ('notes.add_note' | translate) : ('notes.edit_note' | translate) }}"
+                  [icon]="{name: 'pencil-outline'}"
+                  [color]="'congressultralightoutline'"
+                >
+                </app-small-button>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin" (click)="addNote()">
+              <div class="ion-padding note-value" *ngIf="note !== null && note.value !== ''" [innerHTML]="note.value"></div>
+              <div *ngIf="note === null" class="ion-padding not-found">{{ 'notes.not_found' | translate }}</div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ion-row
+      class="grid-no-padding-background ion-padding ion-no-padding-top"
+      *ngIf="session?.faculties && (session?.faculties?.length ?? 0) > 0"
+    >
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ getFacultiesTitle(session.faculties) }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin ion-no-padding">
+              <div class="ion-margin-vertical ion-margin-start">
+                <ion-list>
+                  <ion-item
+                    *ngFor="let oneSpeakername of session?.faculties"
+                    class="ion-no-padding"
+                    routerLink="/app/tabs/speakers/speaker-details/{{oneSpeakername.idSpeaker}}"
+                    [queryParams]="{routeBack: '/app/tabs/programme/session/' + session.idDate + '/' + session.idSession}"
+                    [detail]="true"
+                  >
+                    <app-avatar-initials
+                      class="ion-no-margin ion-margin-end"
+                      [firstName]="oneSpeakername.firstName"
+                      [lastName]="oneSpeakername.lastName"
+                      [picture]="oneSpeakername.picture"
+                      [avatarSize]="40"
+                      [textSize]="18"
+                      slot="start"
+                    >
+                    </app-avatar-initials>
+                    <ion-label class="ion-text-wrap">
+                      {{ oneSpeakername?.firstName }} <b>{{ oneSpeakername?.lastName }}</b>
+                      <p>{{ oneSpeakername?.role?.name }}</p>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row
+      class="grid-no-padding-background ion-padding ion-no-padding-top"
+      *ngIf="session?.moderators && (session?.moderators?.length ?? 0) > 0"
+    >
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ getModeratorsTitle(session.moderators) }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin ion-no-padding">
+              <div class="ion-margin-vertical ion-margin-start">
+                <ion-list>
+                  <ion-item
+                    *ngFor="let oneSpeakername of session.moderators"
+                    class="ion-no-padding"
+                    routerLink="/app/tabs/speakers/speaker-details/{{oneSpeakername.idSpeaker}}"
+                    [queryParams]="{routeBack: '/app/tabs/programme/session/' + session.idDate + '/' + session.idSession}"
+                    [detail]="true"
+                  >
+                    <app-avatar-initials
+                      class="ion-no-margin ion-margin-end"
+                      [firstName]="oneSpeakername?.firstName"
+                      [lastName]="oneSpeakername?.lastName"
+                      [picture]="oneSpeakername?.picture"
+                      [avatarSize]="40"
+                      [textSize]="18"
+                      slot="start"
+                    >
+                    </app-avatar-initials>
+                    <ion-label *ngIf="oneSpeakername" class="ion-text-wrap">
+                      <span *ngIf="oneSpeakername.firstName">{{ oneSpeakername.firstName }}</span>
+                      {{' '}}
+                      <b *ngIf="oneSpeakername.lastName" class="ion-text-uppercase">{{ oneSpeakername.lastName }}</b>
+                      <p *ngIf="oneSpeakername.role && oneSpeakername.role.name">{{ oneSpeakername.role.name }}</p>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top" *ngIf="session?.interventions?.length">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>
+                {{ (session && session.interventions && session.interventions.length === 1) ? ('session.interventions.one_title' |
+                translate) : ('session.interventions.title' | translate) }}
+              </h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin ion-no-padding">
+              <div class="ion-no-padding">
+                <ion-list>
+                  <ng-container *ngFor="let oneInterv of session?.interventions">
+                    <app-session-item-intervention [session]="session" [intervention]="oneInterv" [showTime]="!isTrainingSession">
+                    </app-session-item-intervention>
+                  </ng-container>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row
+      class="grid-no-padding-background ion-padding ion-no-padding-top"
+      *ngIf="session?.speakers && (session?.speakers?.length ?? 0) > 0"
+    >
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h2>{{ getSpeakersTitle(session.speakers) }}</h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin ion-no-padding">
+              <div class="ion-margin-vertical ion-margin-start">
+                <ion-list>
+                  <ion-item
+                    *ngFor="let oneSpeakername of session.speakers"
+                    class="ion-no-padding"
+                    routerLink="/app/tabs/speakers/speaker-details/{{oneSpeakername.idSpeaker}}"
+                    [queryParams]="{routeBack: '/app/tabs/programme/session/' + session.idDate + '/' + session.idSession}"
+                    [detail]="true"
+                  >
+                    <app-avatar-initials
+                      class="ion-no-margin ion-margin-end"
+                      [firstName]="oneSpeakername?.firstName"
+                      [lastName]="oneSpeakername?.lastName"
+                      [picture]="oneSpeakername?.picture"
+                      [avatarSize]="40"
+                      [textSize]="18"
+                      slot="start"
+                    >
+                    </app-avatar-initials>
+                    <ion-label *ngIf="oneSpeakername" class="ion-text-wrap">
+                      <span *ngIf="oneSpeakername.firstName">{{ oneSpeakername.firstName }}</span>
+                      {{' '}}
+                      <b *ngIf="oneSpeakername.lastName" class="ion-text-uppercase">{{ oneSpeakername.lastName }}</b>
+                      <p *ngIf="oneSpeakername.role && oneSpeakername.role.name">{{ oneSpeakername.role.name }}</p>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row> -->
+  </ion-grid>
+</ion-content>

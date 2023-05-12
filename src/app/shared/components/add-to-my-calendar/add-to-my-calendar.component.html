@@ -1,0 +1,34 @@
+<ion-popover [isOpen]="isOpen" (didDismiss)="closePopover()">
+  <ng-template>
+    <ion-list class="ion-padding" lines="none">
+      <ion-item [button]="true" (click)="addToCalendar('apple')">
+        <ion-icon slot="start" src="/assets/icon/logos/apple.svg"></ion-icon>
+        <ion-label>Apple</ion-label>
+      </ion-item>
+      <ion-item [button]="true" (click)="addToCalendar('google')">
+        <ion-icon slot="start" src="/assets/icon/logos/google.svg"></ion-icon>
+        <ion-label>Google</ion-label>
+      </ion-item>
+      <!-- <ion-item [button]="true" (click)="addToCalendar('iCal')">
+        <ion-icon slot="start" src="/assets/icon/logos/iCal.svg"></ion-icon>
+        <ion-label>iCal</ion-label>
+      </ion-item> -->
+      <!-- <ion-item [button]="true" (click)="addToCalendar('office365')">
+        <ion-icon slot="start" src="/assets/icon/logos/office365.svg"></ion-icon>
+        <ion-label>Microsoft365</ion-label>
+      </ion-item> -->
+      <!-- <ion-item [button]="true" (click)="addToCalendar('teams')">
+        <ion-icon slot="start" src="/assets/icon/logos/teams.svg "></ion-icon>
+        <ion-label>MicrosoftTeams</ion-label>
+      </ion-item> -->
+      <ion-item [button]="true" (click)="addToCalendar('outlook')">
+        <ion-icon slot="start" src="/assets/icon/logos/outlook.svg "></ion-icon>
+        <ion-label>Outlook.com</ion-label>
+      </ion-item>
+      <!-- <ion-item [button]="true" (click)="addToCalendar('yahoo')">
+        <ion-icon slot="start" src="/assets/icon/logos/yahoo.svg "></ion-icon>
+        <ion-label>Yahoo</ion-label>
+      </ion-item> -->
+    </ion-list>
+  </ng-template>
+</ion-popover>

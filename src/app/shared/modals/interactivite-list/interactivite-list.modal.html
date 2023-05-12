@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
+    <!-- <ion-title color="light">{{ 'interactivity.choose-room' | translate }}</ion-title> -->
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon color="light" name="close-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="interactivite-list-page">
+  <ion-grid class="ion-text-center interactivite-list-page__grid">
+    <ion-row>
+      <h2 class="titleColors congress-color">{{ 'interactivity.ask-your-questions' | translate }}</h2>
+    </ion-row>
+    <ion-row *ngIf="tabRooms">
+      <ion-col [size]="tabRooms.length > 5 ? 6 : 12" *ngFor="let oneRoom of tabRooms; let index = index" [class]="oneRoom.color">
+        <!-- <ion-card class="ion-no-margin choiceRoom" (click)="goToDetail(oneRoom.slidoKey)">
+          <img src="assets/img/interactivity/{{ dataConfig.language }}/{{ oneRoom.key }}.png">
+        </ion-card> -->
+        <ion-card
+          (click)="goToSlidoDetail(oneRoom.slidoKey);goToGoogleFormDetail(oneRoom.gotTalent);"
+          detail="false"
+          class="ion-no-margin choiceRoom ion-text-center {{ oneRoom.color }}"
+        >
+          <ion-card-content class="ion-no-padding">
+            <ion-label>
+              {{oneRoom.room}}
+              <!-- <br />
+              {{oneRoom.text}} -->
+            </ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">&nbsp;</ion-row>
+  </ion-grid>
+</ion-content>

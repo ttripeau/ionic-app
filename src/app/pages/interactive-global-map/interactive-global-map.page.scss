@@ -1,0 +1,47 @@
+#interactive-page {
+  &::part(scroll) {
+    padding-top: 0;
+  }
+
+  .leaflet-controls-custom {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+
+    &__control {
+      display: flex;
+      align-items: center;
+      background: var(--ion-color-congress);
+
+      ion-label {
+        width: 100px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  #map-global {
+    height: calc(100%);
+    width: 100%;
+    overflow: hidden;
+    display: block;
+  }
+
+  .leaflet-container {
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+  }
+
+  .searchbar {
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+  }
+}

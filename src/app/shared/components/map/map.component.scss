@@ -1,0 +1,83 @@
+#interactive-page {
+  position: relative;
+  height: 100%;
+  background: white;
+
+  &::part(scroll) {
+    padding-top: 0;
+  }
+  .leaflet-controls-levels {
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--ion-color-congress);
+
+    .controls {
+      display: flex;
+      align-items: flex-end;
+
+      ion-button {
+        height: 50px;
+      }
+    }
+  }
+  .leaflet-controls-custom {
+    &__control {
+      z-index: 10000;
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      background: transparent;
+
+      ion-label {
+        width: 100%;
+        white-space: nowrap;
+      }
+      ion-button {
+        width: 50px;
+      }
+    }
+  }
+
+  #map-exhibitors {
+    top: 0px;
+    height: calc(100% - 50px);
+    width: 100%;
+    overflow: hidden;
+    display: block;
+  }
+
+  .leaflet-container {
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+  }
+
+  .searchbar {
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+  }
+}
+
+// .leaflet-controls-custom-ios {
+//   top: 108px !important;
+// }
+
+// .leaflet-controls-custom-md {
+//   top: 61px !important;
+// }
+
+#map-exhibitors.map-ios {
+  height: calc(100% - calc(50px + var(--ion-safe-area-bottom))) !important;
+  // height: calc(100% - 136px) !important;
+}

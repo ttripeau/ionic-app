@@ -1,0 +1,19 @@
+<ion-grid id="app-session-tabs" class="ion-no-padding">
+  <ion-row>
+    <ion-col *ngFor="let tab of tabsToShow; let index = index" [size]="12 / (tabsToShow ? tabsToShow.length : 1)">
+      <ion-card
+        [routerLink]="tab.route"
+        [routerLinkActive]="actualTab === tab.key ? 'active' : ''"
+        routerDirection="root"
+        detail="false"
+        class="cardProgrammeTab ion-text-center"
+        [class]="'tab-' + (index + 1)"
+      >
+        <!-- <app-blocks-svg [block]="index + 1 + ''" class="img-bg" [color]="actualTab === tab.key ? 'light' : 'congress'"></app-blocks-svg> -->
+        <ion-card-content class="ion-no-padding">
+          <ion-label>{{ tab.room | translate }}</ion-label>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

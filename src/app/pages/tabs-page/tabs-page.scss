@@ -1,0 +1,186 @@
+ion-tab-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  --border: none;
+  // --background: linear-gradient(
+  //   180deg,
+  //   var(--ion-color-congress-bis) -75%,
+  //   var(--ion-color-congress-ultralight) 20%,
+  //   var(--ion-color-congress-ultralight) 100%
+  // );
+  // --background: rgb(138, 40, 123);
+  background: var(--ion-color-congress-ultralight);
+  // backdrop-filter: blur(5px);
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  ion-tab-button {
+    --background: transparent;
+    color: rgb(var(--ion-color-light-rgb), 1);
+    --color: rgb(var(--ion-color-light-rgb), 1);
+    --color-selected: rgb(var(--ion-color-light-rgb), 1);
+    --color-focused: rgb(var(--ion-color-light-rgb), 1);
+    --ripple-color: rgb(var(--ion-color-light-rgb), 1);
+
+    @media screen and (max-width: 425px) {
+      &::part(native) {
+        padding: 1px;
+      }
+    }
+
+    &.tab-selected {
+      color: rgb(var(--ion-color-congress-bis-rgb), 1);
+      --color: rgb(var(--ion-color-congress-bis-rgb), 1);
+      --color-selected: rgb(var(--ion-color-congress-bis-rgb), 1);
+      --color-focused: rgb(var(--ion-color-congress-bis-rgb), 1);
+      --ripple-color: rgb(var(--ion-color-congress-bis-rgb), 1);
+    }
+  }
+  div.max-size {
+    width: 80px;
+    margin-top: 16px;
+  }
+}
+// ion-fab {
+//   ion-fab-button {
+//     height: 64px;
+//     width: 64px;
+//     --background: center / cover url('/assets/img/interactivity/interactivity-B.jpg');
+//     margin-bottom: var(--ion-safe-area-bottom);
+
+//     ion-icon {
+//       color: rgb(var(--ion-color-light-rgb), 0.7);
+//       --color: rgb(var(--ion-color-light-rgb), 0.7);
+//       --color-selected: rgb(var(--ion-color-light-rgb), 0.7);
+//       --color-focused: rgb(var(--ion-color-light-rgb), 0.7);
+//       --ripple-color: rgb(var(--ion-color-light-rgb), 0.7);
+//       font-size: 2rem;
+
+//       &.tab-selected {
+//         color: rgb(var(--ion-color-congress-bis-rgb), 1);
+//         --color: rgb(var(--ion-color-congress-bis-rgb), 1);
+//         --color-selected: rgb(var(--ion-color-congress-bis-rgb), 1);
+//         --color-focused: rgb(var(--ion-color-congress-bis-rgb), 1);
+//         --ripple-color: rgb(var(--ion-color-congress-bis-rgb), 1);
+//       }
+//     }
+//     .button-native {
+//       box-shadow: none;
+//     }
+//   }
+// }
+
+.fab-wrapper {
+  position: absolute;
+  height: 80px;
+  width: 20%;
+  max-width: 80px;
+  bottom: var(--ion-safe-area-bottom);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;
+
+  .fab {
+    // background: linear-gradient(
+    //   180deg,
+    //   var(--ion-color-congress-bis) -53%,
+    //   var(--ion-color-congress-ultralight) 45%,
+    //   var(--ion-color-congress-ultralight) 100%
+    // );
+    // background: rgb(138, 40, 123);
+    background: var(--ion-color-congress-ultralight);
+    width: 100%;
+    height: 100%;
+    border-radius: 50% 50% 0 0;
+
+    ion-icon {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 16px;
+      color: rgb(var(--ion-color-light-rgb), 1);
+      --color: rgb(var(--ion-color-light-rgb), 1);
+      --color-selected: rgb(var(--ion-color-light-rgb), 1);
+      --color-focused: rgb(var(--ion-color-light-rgb), 1);
+      --ripple-color: rgb(var(--ion-color-light-rgb), 1);
+      font-size: 2rem;
+
+      &.tab-selected {
+        color: rgb(var(--ion-color-congress-bis-rgb), 1);
+        --color: rgb(var(--ion-color-congress-bis-rgb), 1);
+        --color-selected: rgb(var(--ion-color-congress-bis-rgb), 1);
+        --color-focused: rgb(var(--ion-color-congress-bis-rgb), 1);
+        --ripple-color: rgb(var(--ion-color-congress-bis-rgb), 1);
+
+        & + ion-label {
+          color: rgb(var(--ion-color-congress-bis-rgb), 1);
+        }
+      }
+    }
+
+    ion-label {
+      font-size: 12px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: calc(27px + 2rem);
+      color: rgb(var(--ion-color-light-rgb), 1);
+    }
+  }
+}
+
+.ios.fab-wrapper {
+  height: 76px;
+  max-width: 76px;
+
+  .fab ion-label {
+    top: calc(28px + 2rem);
+  }
+}
+
+.bottom {
+  bottom: 27px !important;
+}
+
+.no-internet {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  background-color: var(--ion-color-danger);
+  position: absolute;
+  bottom: calc(56px + var(--ion-safe-area-bottom));
+  width: 100%;
+  padding: 10px 0 20px 0;
+
+  &.no-tabs {
+    bottom: 0;
+  }
+
+  .value {
+    color: #ffffff;
+    font-size: 14px;
+  }
+}
+
+.ios {
+  & + .no-internet {
+    bottom: calc(50px + var(--ion-safe-area-bottom));
+
+    &.no-tabs {
+      bottom: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  ion-tab-button {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  ion-tab-button {
+    font-size: 8px;
+  }
+}

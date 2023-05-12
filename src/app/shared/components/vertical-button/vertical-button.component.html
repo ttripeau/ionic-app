@@ -1,0 +1,24 @@
+<div (click)="handleCLick($event)" class="app-vertical-button custom-border-radius" [class]="className">
+  <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+  <ion-row class="ion-justify-content-start ion-padding-bottom row-icon">
+    <ion-col size="auto">
+      <div class="icon-style">
+        <ion-icon [name]="icon && icon.name" [src]="icon && icon.src" size="large" class="icon"></ion-icon>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-start" *ngIf="title">
+    <ion-col size="auto" class="ion-no-padding"><h3 class="ion-text-start">{{ title }}</h3></ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-start" *ngIf="text">
+    <ion-col size="auto" class="ion-no-padding">
+      <p class="ion-text-start">{{ text }}</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-end">
+    <ion-col size="auto" class="ion-padding-top">&nbsp;</ion-col>
+  </ion-row>
+</div>

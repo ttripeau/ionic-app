@@ -1,0 +1,24 @@
+ion-menu {
+  .titleIonMenu {
+    color: var(--ion-color-congress-ultralight);
+  }
+
+  ion-list {
+    &:last-of-type {
+      margin-bottom: 60px;
+    }
+
+    ion-list-header {
+      color: var(--ion-color-congress-ultralight);
+    }
+
+    ion-icon {
+      color: var(--ion-color-congress-bis);
+    }
+
+    ion-label {
+      color: var(--ion-color-congress-ultralight);
+      // font-family: 'New-order';
+    }
+  }
+}

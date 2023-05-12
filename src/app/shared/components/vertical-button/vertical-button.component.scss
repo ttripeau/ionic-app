@@ -1,0 +1,159 @@
+.app-vertical-button {
+  position: relative;
+  padding: 6px;
+  height: 100%;
+
+  .icon {
+    margin-bottom: -2px;
+  }
+
+  h3,
+  p {
+    margin: 0;
+    padding: 0 5px;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .chevron {
+    font-size: 24px;
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+  }
+
+  .icon-style {
+    border-radius: 50%;
+    padding: 10px 10px;
+    display: flex;
+  }
+
+  &.base {
+    background-image: url(/assets/img/interactivity/interactivity-A.jpg);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    h3,
+    p {
+      color: var(--ion-color-congress-light);
+    }
+
+    .icon-style {
+      background-color: var(--ion-color-congress-ultralight);
+    }
+  }
+
+  &.s2 {
+    background-image: url(/assets/img/interactivity/interactivity-B.jpg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    h3,
+    p {
+      color: var(--ion-color-congress-light);
+    }
+
+    .icon-style {
+      background-color: var(--ion-color-congress-ultralight);
+    }
+  }
+
+  &.light {
+    background: white;
+
+    h3,
+    p,
+    .chevron {
+      color: var(--ion-color-congress);
+    }
+
+    .icon-style {
+      background-color: rgba(var(--ion-color-congress-ultralight-rgb), 0.4);
+      color: var(--ion-color-congress);
+    }
+  }
+
+  &.congressbis {
+    background: var(--ion-color-congress-bis);
+
+    h3,
+    p,
+    .chevron {
+      color: var(--ion-color-light);
+    }
+
+    .icon-style {
+      background-color: rgba(var(--ion-color-light-rgb), 0.75);
+      color: var(--ion-color-congress-bis);
+    }
+  }
+
+  &.tertiary {
+    background: #fff;
+    border: solid 1px var(--ion-color-congress-bis);
+
+    h3,
+    p {
+      color: var(--ion-color-dark);
+    }
+    .chevron {
+      color: var(--ion-color-congress-bis);
+    }
+
+    .icon-style {
+      background-color: var(--ion-color-congress-bis);
+      color: var(--ion-color-light);
+    }
+  }
+
+  &.congressultralight {
+    background: var(--ion-color-congress-ultralight);
+    border: solid 1px var(--ion-color-congress-ultralight);
+
+    h3,
+    .chevron {
+      color: var(--ion-color-congress-bis);
+    }
+    p {
+      color: var(--ion-color-light);
+    }
+
+    .icon-style {
+      background-color: var(--ion-color-congress-bis);
+      color: var(--ion-color-light);
+    }
+  }
+
+  &.PCR {
+    &.happening-now {
+      background-image: url('/assets/img/blocks/Bloc-PCR-Happening-now.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    &.pcr-secondary {
+      background-image: url('/assets/img/blocks/Bloc-PCR-secondary.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .row-icon {
+      padding-bottom: 0;
+    }
+
+    .icon-style {
+      background-color: transparent;
+    }
+  }
+}

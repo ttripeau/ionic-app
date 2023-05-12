@@ -1,0 +1,62 @@
+ion-header {
+  background: #fff;
+}
+
+.appReturnHeader .toolbarAppReturnHeader ion-button::part(native) {
+  overflow: visible;
+}
+
+.appReturnHeader {
+  // background-color: var(--ion-color-header);
+
+  .toolbarAppReturnHeader {
+    // position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    --background: transparent;
+    --color: white;
+    color: white;
+    // background-color: var(--ion-color-header);
+    backdrop-filter: blur(5px);
+
+    ion-button {
+      color: white;
+      opacity: 1 !important;
+    }
+  }
+
+  .btn {
+    --background: rgba(var(--ion-color-congress-ultralight-rgb), .1);
+    --padding-start: 7px;
+    --padding-end: 7px;
+    margin-right: 7px;
+    font-weight: bold;
+  }
+}
+
+.is-favorite {
+  color: var(--ion-color-congress-heart);
+}
+
+.not-is-favorite {
+  color: var(--ion-color-light);
+}
+
+.ios {
+  ion-icon.ion-no-margin {
+    margin: 0;
+    margin-inline-end: 0;
+
+    & + span {
+      margin-left: -5px;
+    }
+  }
+}
+
+.md {
+  ion-icon.ion-no-margin {
+    font-size: 24px;
+    margin-right: 3px;
+  }
+}

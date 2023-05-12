@@ -1,0 +1,53 @@
+<div id="interactive-page">
+  <div *ngIf="objectKeys(data).length > 1" class="leaflet-controls-levels">
+    <ion-label color="light" class="ion-padding-horizontal ion-padding-vertical"
+      >{{ 'interactive-map.level' | translate }} : {{ level }}</ion-label
+    >
+    <div class="controls">
+      <ion-button class="ion-no-margin" expand="full" color="congressbis" (click)="handleLevel(-1)" [disabled]="isDisabledLevelOut">
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="ion-no-margin" expand="full" color="congressbis" (click)="handleLevel(1)" [disabled]="isDisabledLevelIn">
+        <ion-icon name="chevron-up-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div
+    class="leaflet-controls-custom"
+    [ngClass]="{ 'leaflet-controls-custom-ios': plateformType === 'ios', 'leaflet-controls-custom-md': plateformType === 'md' }"
+  ></div>
+
+  <!-- <div class="leaflet-controls-custom__control">
+    <ion-button
+      expand="block"
+      size="small"
+      slot="start"
+      color="congressultralight"
+      (click)="handleClickZoom(1)"
+      [disabled]="isDisabledZoomIn"
+    >
+      <ion-icon color="congress" slot="icon-only" name="add-outline"></ion-icon>
+    </ion-button>
+    <ion-button
+      expand="block"
+      size="small"
+      slot="start"
+      color="congressultralight"
+      (click)="handleClickZoom(-1)"
+      [disabled]="isDisabledZoomOut"
+    >
+      <ion-icon color="congress" name="remove-outline"></ion-icon>
+    </ion-button>
+  </div> -->
+
+  <!-- <div class="leaflet-controls-custom__control">
+    <ion-button class="ion-no-margin" expand="full" color="congressultralight" (click)="handleClickZoom(-1)" [disabled]="isDisabledZoomOut">
+      <ion-icon name="remove-outline"></ion-icon>
+    </ion-button>
+    <ion-button class="ion-no-margin" expand="full" color="congressultralight" (click)="handleClickZoom(1)" [disabled]="isDisabledZoomIn">
+      <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+    </ion-button>
+  </div> -->
+
+  <div id="map-exhibitors" [ngClass]="{ 'map-ios': plateformType === 'ios', 'map-md': plateformType === 'md' }"></div>
+</div>

@@ -1,0 +1,55 @@
+ion-toolbar {
+  --background: rgba(var(--ion-color-congress-rgb), 0.9);
+}
+ion-content {
+  --background: var(--ion-color-congress-background-gradient-modals);
+}
+
+.title {
+  display: flex;
+  color: var(--ion-color-congress-bis);
+  align-items: center;
+
+  ion-icon {
+    transform: scale(1.5) translateY(12.5%);
+  }
+}
+
+ion-list {
+  background: transparent;
+
+  ion-item {
+    --background: transparent;
+    --color: var(--ion-color-light);
+    --border-color: var(--ion-color-congress-ultralight);
+    --inner-border-width: 0px 0 3px 0;
+
+    h3 {
+      font-size: 18px;
+    }
+
+    ion-icon {
+      color: var(--ion-color-light);
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .time {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+
+      .progress {
+        padding: 0 4px;
+        flex-grow: 1;
+        padding-bottom: 12px;
+      }
+    }
+
+    .ion-text-right {
+      font-size: 14px;
+    }
+  }
+}
+

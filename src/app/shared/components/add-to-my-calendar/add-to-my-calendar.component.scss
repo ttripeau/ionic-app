@@ -1,0 +1,10 @@
+ion-popover {
+  --width: 260px;
+  --height: auto;
+
+  &::part(content) {
+    top: 50% !important;
+    left: 0 !important;
+    position: relative !important;
+  }
+}

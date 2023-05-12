@@ -1,0 +1,45 @@
+.app-small-button {
+  --background: rgba(var(--ion-color-congress-ultralight-rgb), .1) !important;
+  --padding-start: 14px !important;
+  --padding-end: 14px !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+
+  &.congressultralight {
+    --background: var(--ion-color-congress-ultralight) !important;
+  }
+
+  &.congressultralight-rgb {
+    --background: rgba(var(--ion-color-congress-ultralight-rgb), .3) !important;
+  }
+
+  &.congresster-rgb {
+    --background: rgba(var(--ion-color-congress-ter-rgb), .3) !important;
+  }
+
+  &.congress {
+    --background: var(--ion-color-congress) !important;
+  }
+
+  &.congressbis-rgb {
+    --background: rgba(var(--ion-color-congress-bis-rgb), .2) !important;
+  }
+
+  &.congressbis {
+    --background: var(--ion-color-congress-bis) !important;
+  }
+
+  &.congressoutline {
+    --background: var(--ion-color-congress) !important;
+    --border-color: rgba(var(--ion-color-light-rgb), .3) !important;
+    --border-style: solid !important;
+    --border-width: 1px !important;
+  }
+
+  &.congressultralightoutline {
+    --background: var(--ion-color-congress-ultralight) !important;
+    --border-color: rgba(var(--ion-color-light-rgb), .3) !important;
+    --border-style: solid !important;
+    --border-width: 1px !important;
+  }
+}

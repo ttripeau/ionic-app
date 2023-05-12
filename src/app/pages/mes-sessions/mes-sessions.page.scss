@@ -1,0 +1,26 @@
+#mes-sessions-page {
+  .session-tabs {
+    margin-top: 60px;
+  }
+
+  ion-card-content {
+    min-height: 64px;
+    padding: 10px 10px;
+    align-items: self-end;
+    display: flex;
+    justify-content: center;
+  }
+
+  .titleDayCalendar {
+    font-size: 16px;
+    margin-left: 10px;
+    text-transform: capitalize;
+    font-weight: bold;
+    color: var(--ion-color-congress-ultralight);
+  }
+
+  .my-sessions-icon {
+    color: var(--ion-color-congress-heart);
+    vertical-align: text-top;
+  }
+}

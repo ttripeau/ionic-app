@@ -1,0 +1,11 @@
+{
+  "name": "myApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "proxies": [{
+    "path": "/login",
+    "proxyUrl": "https://app.auth0.com"
+  }]
+}

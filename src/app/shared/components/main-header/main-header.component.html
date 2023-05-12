@@ -1,0 +1,24 @@
+<ion-header class="appMainHeader ion-no-border">
+  <ion-toolbar
+    class="toolbarAppMainHeader ion-no-border"
+    [ngStyle]="{
+      'position': positionAbsolute ? 'absolute' : 'relative',
+      'background-color': colorBg === 'light' ? '#fff' : colorBg ? 'rgba(var(--ion-color-' + colorBg + '-rgb), 1)' : 'var(--ion-color-header)'
+    }"
+    >
+    <ion-buttons slot="start">
+      <ion-menu-button [color]="colorBtn" autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-row *ngIf="account || title" class="ion-justify-content-end ion-align-items-center">
+      <ion-title [color]="colorTitle">{{ title }}</ion-title>
+
+      <ion-buttons *ngIf="noteDelete">
+        <ion-button autoHide="false" (click)="toggleDeleteMode()">
+          <ion-icon [color]="colorBtn" [name]="!isDeleteModeEnabled ? 'trash-outline' : 'checkmark-outline'" size="large"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-row>
+  </ion-toolbar>
+
+  <ng-content></ng-content>
+</ion-header>

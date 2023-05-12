@@ -1,0 +1,87 @@
+.header .toolbar ion-button::part(native) {
+  overflow: visible;
+}
+
+.header {
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    --background: transparent;
+    --color: white;
+    color: white;
+  }
+
+  .basic {
+    --background: var(--ion-color-congress);
+    background: var(--ion-color-congress);
+  }
+
+  .filter {
+    --background: var(--ion-color-congress);
+    background: var(--ion-color-congress);
+  }
+}
+
+.ios .toolbar {
+  padding-bottom: 6px;
+}
+
+ion-segment {
+  &-button.segment-button-checked::part(native) {
+    color: var(--ion-color-congress);
+  }
+  &-button::part(indicator-background) {
+    background: var(--ion-color-congress-bis);
+  }
+}
+.toolbar {
+  --background: transparent;
+
+  &__tabs {
+    // background:rgba(255,255,255,0.8);
+    background: var(--ion-color-light);
+    color: var(--ion-color-dark);
+    --color: var(--ion-color-dark);
+  }
+}
+
+.toolbar-buttons-end {
+  min-width: 46px;
+}
+
+.ios {
+  .toolbar-buttons-end,
+  .toolbar__custom {
+    padding-top: 6px;
+  }
+}
+
+.md {
+  .toolbar__custom {
+    padding-top: 6px;
+  }
+}
+
+ion-content {
+  padding-top: 70px;
+}
+
+.plan {
+  height: calc(100% - 10px);
+  // &:after {
+  //   position: absolute;
+  //   content: '';
+  //   height: 100%;
+  //   width: 100%;
+  //   top: 0;
+  //   left: 0;
+  //   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.188) 0%, transparent 100%);
+  //   pointer-events: none;
+  // }
+
+  &::part(scroll) {
+    padding-top: 0;
+  }
+}

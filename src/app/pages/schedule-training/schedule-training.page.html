@@ -1,0 +1,218 @@
+<app-main-header colorBtn="light"></app-main-header>
+
+<ion-content id="schedule-page">
+  <ion-grid class="ion-no-padding session-tabs">
+    <app-session-tabs [actualTab]="'schedule-training'"></app-session-tabs>
+  </ion-grid>
+
+  <div class="about-header" *ngIf="templateConfig">
+    <!-- <ion-row class="ion-padding-top">
+      <ion-col size="6">
+        <ion-button (click)="clickNews()" expand="block" color="congressultralight" class="ion-text-uppercase">
+          <ion-icon color="light" name="bulb" slot="start"></ion-icon>
+          <ion-label color="light">{{ 'tabs.news' | translate }}</ion-label>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="clickYouthSpecial()" expand="block" color="congressultralight" class="ion-text-uppercase">
+          <ion-icon color="light" [src]="'assets/icon/child-outline.svg'" slot="start"></ion-icon>
+          <ion-label color="light">{{ 'tabs.youth-special' | translate }}</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row> -->
+    <ion-row *ngIf="isNews || isSpecialYouth">
+      <ion-col>
+        <app-text-info-html *ngIf="isNews && newsText" [text]="newsText"></app-text-info-html>
+        <app-text-info-html *ngIf="isSpecialYouth && specialYouthText" [text]="specialYouthText"></app-text-info-html>
+      </ion-col>
+    </ion-row>
+    <!-- <img [src]="templateConfig.logoHeader"/> -->
+    <div class="toolbarFilters toolbar-wrapper">
+      <ion-toolbar class="ion-no-padding ion-no-margin toolbar" mode="ios">
+        <ion-segment class="toolbar__tabs" [(ngModel)]="dayIndex" (ionChange)="updateDay();updateSchedule(true)" [scrollable]="true">
+          <ion-segment-button
+            *ngFor="let oneFilterDay of filterDays"
+            [value]="oneFilterDay.val"
+            [innerHTML]="oneFilterDay.label ? oneFilterDay.label : ('global.all' | translate)"
+          >
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+
+      <ion-toolbar class="ion-no-padding ion-no-margin toolbar">
+        <ion-grid>
+          <ion-row class="filters-buttons">
+            <ion-col size="4">
+              <ion-select
+                *ngIf="filtersConfig.topics"
+                class="topics custom-border-radius"
+                aria-label="Fruit"
+                interface="popover"
+                placeholder="{{'filter-session.by-topics' | translate}}"
+                [multiple]="true"
+                (ionChange)="selectionChangeTopics($event)"
+                [value]="filterTopics"
+              >
+                <ng-container *ngFor="let option of filtersConfig.topics">
+                  <ion-select-option *ngIf="option.isTheme" class="disabled">{{option.val}}</ion-select-option>
+                  <ion-select-option *ngIf="!option.isTheme" [value]="option.val">{{option.val}}</ion-select-option>
+                </ng-container>
+              </ion-select>
+            </ion-col>
+            <ion-col size="4">
+              <ion-select
+                *ngIf="filtersConfig.tracks"
+                class="tracks custom-border-radius"
+                aria-label="Fruit"
+                interface="popover"
+                placeholder="{{'filter-session.by-tracks' | translate}}"
+                [multiple]="true"
+                (ionChange)="selectionChangeTracks($event)"
+                [value]="filterTracks"
+              >
+                <ion-select-option *ngFor="let option of filtersConfig.tracks" [value]="option.val">{{option.val}}</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col size="4">
+              <ion-select
+                *ngIf="filtersConfig.focuses"
+                class="focuses custom-border-radius"
+                aria-label="Fruit"
+                interface="popover"
+                placeholder="{{'filter-session.by-focuses' | translate}}"
+                [multiple]="true"
+                (ionChange)="selectionChangeFocuses($event)"
+                [value]="filterFocuses"
+              >
+                <ion-select-option *ngFor="let option of filtersConfig.focuses" [value]="option.val">{{option.val}}</ion-select-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-toolbar>
+
+      <ion-toolbar class="ion-no-padding ion-no-margin toolbar" id="searchToolbarSchedule">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              <ion-searchbar
+                color="light"
+                debounce="1000"
+                class="toolbar__search ion-text-left"
+                [(ngModel)]="dataConfig.queryText.programmeTraining"
+                (ionInput)="updateSearch()"
+                (ionChange)="search()"
+                placeholder="{{'programme.search' | translate}} ... "
+              ></ion-searchbar>
+            </ion-col>
+            <ion-col size="3">
+              <ion-button expand="block" color="light" (click)="openModalFilterSessions()">
+                <ion-icon name="options-outline"></ion-icon>&nbsp; {{'global.filters' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-toolbar>
+    </div>
+  </div>
+
+  <ion-grid class="ion-no-padding bottomSpacesGrid">
+    <ion-row *ngIf="showFilters" class="ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <ng-container *ngFor="let filters of filtersSelected">
+          <ion-chip *ngFor="let oneFilter of filters.value" outline color="congress">
+            <ion-icon
+              [name]="getChipIcon(filters.key, oneFilter).name"
+              [src]="getChipIcon(filters.key, oneFilter).src"
+              color="dark"
+            ></ion-icon>
+            <ion-label color="dark" [innerHTML]="oneFilter"></ion-label>
+            <ion-icon color="dark" (click)="deleteFilter(oneFilter, filters.key)" name="close-circle"></ion-icon>
+          </ion-chip>
+        </ng-container>
+      </ion-col>
+    </ion-row>
+
+    <ion-row size="12" *ngIf="isLoading">
+      <ion-col size="12" class="ion-padding custom-skeleton">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col size="12" class="titleColors ion-no-padding-top">
+              <ion-item style="border-radius: 999px">
+                <ion-label>
+                  <h2>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                  </h2>
+                </ion-label>
+              </ion-item>
+              <br />
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-padding ion-no-margin sessions-day">
+              <ion-list lines="none">
+                <app-item-skeleton [lines]="'none'"></app-item-skeleton>
+                <app-item-skeleton [lines]="'none'"></app-item-skeleton>
+                <app-item-skeleton [lines]="'none'"></app-item-skeleton>
+                <app-item-skeleton [lines]="'none'"></app-item-skeleton>
+              </ion-list>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+
+    <ng-container *ngIf="!isLoading">
+      <ion-row
+        *ngFor="let sessionHalfDay of sessionsToShow; let indexSessionToShow = index;"
+        class="grid-no-padding-background ion-padding ion-no-padding-top"
+      >
+        <ion-col size="12">
+          <app-card-congress>
+            <ng-container slot="title">
+              <ion-col size="12" class="titleColors ion-no-padding-top">
+                <h2>
+                  {{ dateCongress.daysTraining[sessionHalfDay.dayIndex] ?
+                  getDayTranslated(dateCongress.daysTraining[sessionHalfDay.dayIndex]) + ' - ' : '' }}{{'programme.titles.' +
+                  sessionHalfDay.time | translate}}
+                </h2>
+              </ion-col>
+            </ng-container>
+            <ng-container slot="content">
+              <ion-col size="12" class="ion-no-padding ion-no-margin sessions-day">
+                <ion-list lines="none" #scheduleList>
+                  <ion-item-sliding
+                    id="session-{{indexSessionToShow}}-{{indexSessionToShowSessions}}-{{OneSession.timeEndTimestamp}}"
+                    class="session-item"
+                    *ngFor="let OneSession of sessionHalfDay.sessions; let indexSessionToShowSessions = index;"
+                    #slidingItem
+                    [hidden]="OneSession?.hide"
+                  >
+                    <app-session-item-schedule
+                      [hasFavoriteStar]="true"
+                      [session]="OneSession"
+                      link="/app/tabs/programme/session/{{(dayIndex < 999) ? dayIndex : sessionHalfDay.dayIndex }}/{{OneSession.idSession}}"
+                      [linkQueryParams]="{routeBack: '/app/tabs/programme/training'}"
+                      [listFavorites]="listFavorites"
+                      [sessionsToShow]="sessionsToShow"
+                      [indexSessionToShow]="indexSessionToShow"
+                      [indexSessionToShowSessions]="indexSessionToShowSessions"
+                      [sponsorsFullSize]="true"
+                      [showTracks]="false"
+                      [showLocation]="false"
+                      [showTime]="true"
+                    >
+                    </app-session-item-schedule>
+                  </ion-item-sliding>
+                </ion-list>
+              </ion-col>
+            </ng-container>
+          </app-card-congress>
+        </ion-col>
+        <ion-infinite-scroll (ionInfinite)="loadData($event)" class="infinite">
+          <ion-infinite-scroll-content class="loading-spinner" loadingSpinner="bubbles"> </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-row>
+    </ng-container>
+  </ion-grid>
+</ion-content>

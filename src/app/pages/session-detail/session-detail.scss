@@ -1,0 +1,196 @@
+.session-track-ionic {
+  color: var(--ion-color-primary);
+}
+
+.session-track-angular {
+  color: var(--ion-color-angular);
+}
+
+.session-track-communication {
+  color: var(--ion-color-communication);
+}
+
+.session-track-tooling {
+  color: var(--ion-color-tooling);
+}
+
+.session-track-services {
+  color: var(--ion-color-services);
+}
+
+.session-track-design {
+  color: var(--ion-color-design);
+}
+
+.session-track-workshop {
+  color: var(--ion-color-workshop);
+}
+
+.session-track-food {
+  color: var(--ion-color-food);
+}
+
+.session-track-documentation {
+  color: var(--ion-color-documentation);
+}
+
+.session-track-navigation {
+  color: var(--ion-color-navigation);
+}
+
+/* Favorite Icon
+ * --------------------------------------------------------
+ */
+
+.show-favorite {
+  position: relative;
+}
+
+.icon-heart-empty,
+.icon-heart {
+  --border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+
+  position: absolute;
+
+  top: 5px;
+  right: 5px;
+
+  width: 48px;
+  height: 48px;
+
+  font-size: 16px;
+
+  transition: transform 300ms ease;
+}
+
+.icon-heart-empty {
+  transform: scale(1);
+}
+
+.icon-heart {
+  transform: scale(0);
+}
+
+.show-favorite .icon-heart {
+  transform: scale(1);
+}
+
+.show-favorite .icon-heart-empty {
+  transform: scale(0);
+}
+
+h1 {
+  margin: 0;
+}
+
+.about-header {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: auto;
+
+  span {
+    display: block;
+    margin-top: 20px;
+  }
+}
+
+.h3-custom {
+  font-weight: 600;
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+#speaker-detail {
+  .about-header-text {
+    padding-top: 70px;
+  }
+
+  ion-card {
+    h2 {
+      font-weight: bold;
+      font-size: 20px;
+      color: var(--ion-color-congress);
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    ion-avatar {
+      margin: 10px;
+      width: 46px;
+      text-align: center;
+    }
+
+    .photoUser {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.img-banner {
+  margin-top: 9px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 60px;
+  width: 100%;
+  font-weight: bolder;
+  font-size: 18px;
+  text-align: start;
+  background: var(--ion-color-light);
+  color: var(--ion-color-congress);
+  border-radius: 6px;
+
+  &--icon--map {
+    width: 35px;
+    height: 35px;
+    font-weight: 400;
+    margin-right: 20px;
+    padding: 5px;
+    background: var(--ion-color-congress);
+    color: var(--ion-color-light);
+    border-radius: 999px;
+  }
+
+  &--icon--chevron {
+    padding-top: 2px;
+    width: 24px;
+    height: 24px;
+    font-weight: 400;
+  }
+}
+
+.about-header-text img {
+  height: auto;
+}
+
+.titleColors {
+  .subtitle {
+    font-style: italic;
+  }
+  h3 {
+    margin-top: 0;
+    padding-bottom: 20px;
+    font-size: 14px;
+  }
+}
+
+.guestComment {
+  background: rgba(var(--ion-color-congress-ultralight-rgb), 0.2);
+  color: var(--ion-color-dark);
+
+  &:first-of-type {
+    padding-top: calc(var(--ion-padding, 16px) + var(--ion-padding, 16px));
+  }
+
+  &:last-of-type {
+    padding-bottom: calc(var(--ion-padding, 16px) + var(--ion-padding, 16px));
+  }
+}

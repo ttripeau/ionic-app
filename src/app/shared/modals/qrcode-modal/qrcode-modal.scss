@@ -1,0 +1,23 @@
+ion-toolbar {
+  --background: rgba(var(--ion-color-congress-rgb), 1);
+}
+ion-content {
+  --background: #FFFFFF;
+}
+
+p {
+  text-align: center;
+}
+
+/* The div container */
+.qrcodeImage {
+  display: flex;
+  justify-content: center;
+}
+
+/* Add custom styles here */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

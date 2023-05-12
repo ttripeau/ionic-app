@@ -1,0 +1,47 @@
+<app-main-header [colorBg]="headerChangeColor  ? undefined : undefined" [colorBtn]="headerChangeColor ? 'light' : 'light'"></app-main-header>
+
+<ion-content id="aproposDePage" [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <div class="about-header" *ngIf="templateConfig?.logoHeader">
+    <img class="logo-header" [src]="templateConfig.logoHeader" />
+  </div>
+
+  <ion-grid class="ion-no-padding bottomSpacesGrid contentAproposDe">
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col class="titleColors ion-no-padding-top" size="12">
+              <h1 class="ion-no-margin ion-padding-bottom">{{'aproposde.about' | translate}}</h1>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-padding ion-no-margin">
+              <div class="ion-padding">
+                <h2 class="firstOne">{{'aproposde.development' | translate}}</h2>
+                <p>
+                  {{'aproposde.development-content-1' | translate}}<ion-label class="text-highlight">Europa Group</ion-label>{{'aproposde.development-content-2'
+                  | translate}}
+                </p>
+
+                <h2>{{'aproposde.politic' | translate}}</h2>
+                <p>{{'aproposde.politic-see-here' | translate}}</p>
+                <ion-button [color]="'congressultralight'" (click)="openUrlAproposDe(appConfig.privacyPolicy)">
+                  {{'aproposde.data-protection' | translate}}
+                </ion-button>
+
+                <h2>{{'aproposde.cgu' | translate}}</h2>
+                <p>{{'aproposde.click-cgu' | translate}}</p>
+                <ion-button [color]="'congressultralight'" (click)="openUrlAproposDe(appConfig.cgu)">
+                  {{'aproposde.cgu' | translate}}
+                </ion-button>
+
+                <h2>{{'aproposde.version' | translate}}</h2>
+                <p>{{versionApp ? "Version "+versionApp : ''}}</p>
+              </div>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,6 @@
+
+<ion-button size="small" class="app-small-button" [class]="color" shape="round" fill="solid" type="block" (click)="handleCLick($event)">
+  <ion-icon *ngIf="icon && icon.name || icon && icon.src" slot="start" [color]="colorText" [name]="icon && icon.name" [src]="icon && icon.src"></ion-icon>
+  <ion-label [color]="colorText">{{ text }}</ion-label>
+  <ion-icon *ngIf="iconEnd && iconEnd.name || iconEnd && iconEnd.src" slot="end" [color]="colorText" [name]="iconEnd && iconEnd.name" [src]="iconEnd && iconEnd.src"></ion-icon>
+</ion-button>

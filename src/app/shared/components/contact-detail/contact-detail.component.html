@@ -1,0 +1,12 @@
+<ion-list class="app-contact-detail" lines="none">
+  <ng-container *ngFor="let detail of details">
+    <ion-item
+      *ngIf="detail.show"
+      (click)="handleClick(detail.link)"
+      [detail]="detail.link ? true: false"
+      >
+      <ion-icon [color]="detail.color ? detail.color : 'congress'" [class]="detail.class" [name]="detail.icon" [src]="detail.src"></ion-icon>&nbsp;
+      <ion-label [color]="detail.textColor" class="ion-text-wrap" [class]="detail.class" [innerHtml]="detail.detail"></ion-label>
+    </ion-item>
+  </ng-container>
+</ion-list>

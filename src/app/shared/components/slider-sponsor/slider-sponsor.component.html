@@ -1,0 +1,34 @@
+<swiper
+  #swiper
+  class="ion-padding-bottom ion-no-padding-top mySwiper"
+  [virtual]="true"
+  [initialSlide]="config.initialSlide"
+  [slidesPerView]="config.slidesPerView"
+  [centeredSlides]="config.centeredSlides"
+  [autoplay]="config.autoplay"
+  [pagination]="{
+    clickable: true
+  }"
+  [grabCursor]="true"
+  [cubeEffect]="{
+    shadow: true,
+    slideShadows: true,
+    shadowOffset: 0,
+    shadowScale: 0
+  }"
+  >
+  <ng-container *ngFor="let slide of slides; index as i">
+    <ng-container *ngIf="slide">
+      <ng-template swiperSlide>
+        <div class="ion-padding-bottom">
+          <img
+            [src]="slide.picture"
+            onerror="this.src='assets/img/slides/slide-1.jpg'"
+            (click)="openUrl(slide.link);changePage(slide.route)"
+            class="custom-border-radius"
+            />
+        </div>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</swiper>

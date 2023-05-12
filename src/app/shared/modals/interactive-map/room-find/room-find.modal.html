@@ -1,0 +1,32 @@
+<ion-toolbar class="ion-no-border">
+  <ion-title color="light">{{'interactive-map.find' | translate}}</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="closeModal()">
+      <ion-icon color="light" name="close-outline" size="large"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content id="room-detail-page">
+  <ion-grid class="ion-text-center">
+    <ion-row size="12" class="ion-padding ion-align-items-center ion-justify-content-between">
+      <ion-col size="12" class="ion-text-left">
+        <ion-searchbar size="12" type="text" color="light" debounce="500" [placeholder]="'global.search' | translate" (ionChange)="getItems($event)"></ion-searchbar>
+      </ion-col>
+      <ion-col size="12">
+        <ion-list size="12" *ngIf="!!items" lines="lines">
+          <ion-item *ngIf="items.length === 0"> {{'interactive-map.no-values' | translate}} </ion-item>
+          <ion-item size="12" *ngFor="let item of items;" (click)="selectItem(item)" [detail]="true">
+            <ion-avatar slot="start">
+              <img onerror="this.src='assets/img/default-imgs/default-speaker.jpg'" class="avatar" [src]="item.location.exposant.logo" />
+            </ion-avatar>
+            <p>
+              {{ item.location.exposant.societe }}
+              <!-- - Stand: {{ item.location.numeroStand }} -->
+            </p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

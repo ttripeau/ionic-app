@@ -1,0 +1,138 @@
+<app-session-item-style></app-session-item-style>
+<ng-template #labels>
+  <ion-label *ngIf="!session && intervention" class="sessions-day__content">
+    <h3 class="sessions-day__content__title">
+      <b class="congress">{{ intervention.titleSession }}</b>
+    </h3>
+    <p class="sessions-day__content__title">
+      <b class="congress">{{ intervention.title }}</b>
+    </p>
+    <p *ngIf="intervention?.typeSession" class="sessions-day__content__track">
+      <ion-chip class="sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" [name]="getIcon().name" [src]="getIcon().src"> </ion-icon>
+          {{ intervention.typeSession }}
+        </ion-label>
+      </ion-chip>
+    </p>
+    <p *ngIf="intervention.sponsors && intervention.sponsors.length > 0" class="sessions-day__content__track">
+      <ion-chip class="sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_sponsor.svg"> </ion-icon>
+          {{ getInlineSponsors(intervention.sponsors) }}
+        </ion-label>
+      </ion-chip>
+    </p>
+    <p *ngIf="intervention.roleSpeaker" class="sessions-day__content__track">
+      <ion-chip class="sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" name="person-outline"> </ion-icon>
+          {{ intervention.roleSpeaker.name }}
+        </ion-label>
+      </ion-chip>
+    </p>
+  </ion-label>
+  <ion-label *ngIf="session && intervention" class="sessions-day__content" [ngStyle]="{ 'border-left-color': intervention ? undefined : session.color }">
+    <h3 class="sessions-day__content__title">
+      <b>{{ intervention.titleFR ? intervention.titleFR : '' }}</b>
+    </h3>
+    <ng-container *ngIf="intervention.speakers && intervention.speakers.length > 0">
+      <p *ngFor="let speaker of intervention.speakers">
+        <ion-chip color="light" (click)="openSpeaker(speaker)">
+          <app-avatar-initials
+            style="margin-right: 6px;"
+            [firstName]="speaker?.firstName"
+            [lastName]="speaker?.lastName"
+            [picture]="speaker?.picture"
+            [avatarSize]="24"
+            [textSize]="12"
+          >
+          </app-avatar-initials>
+          <ion-label color="dark">{{ speaker.firstName }} <span class="ion-text-uppercase">{{ speaker.lastName }}</span></ion-label>
+        </ion-chip>
+      </p>
+    </ng-container>
+    <p *ngIf="intervention.typeSession" class="sessions-day__content__track">
+      <ion-chip class="sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_type.svg"> </ion-icon>
+          {{ intervention.typeSession }}
+        </ion-label>
+      </ion-chip>
+    </p>
+    <p *ngIf="intervention.sponsors && intervention.sponsors.length > 0" class="sessions-day__content__track">
+      <ion-chip class="sessions-day__content__track__chip" color="dark" outline>
+        <ion-label color="dark">
+          <ion-icon class="sessions-day__content__track__chip__icon" color="dark" src="assets/icon/icon_sponsor.svg"> </ion-icon>
+          {{ getInlineSponsors(intervention.sponsors) }}
+        </ion-label>
+      </ion-chip>
+    </p>
+  </ion-label>
+</ng-template>
+
+<ion-item
+  class="ion-no-padding sessions-day"
+  [attr.track]="
+    intervention && intervention.themes ? encodeTheme(intervention.themes) : session && session.tracks.length > 0 ? encodeTrack(session.tracks[0]) : ''
+  "
+  [detail]="!hasFavorite && link"
+>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col *ngIf="showTime && (session || intervention)" size="2" class="ion-text-center sessions-day__time">
+        <ion-label *ngIf="!session && intervention" color="dark" class="sessions-day__time__label">
+          {{ intervention.time ? intervention.time : intervention.timeBegin }}
+        </ion-label>
+        <ion-label *ngIf="session && intervention" color="dark" class="sessions-day__time__label">
+          {{ intervention.timeBegin ? intervention.timeBegin : null }}
+        </ion-label>
+      </ion-col>
+      <ion-col
+        *ngIf="link"
+        [size]="showTime ? (hasFavorite ? 8 : 10) : hasFavorite ? 10 : 12"
+        routerLinkActive="active"
+        routerDirection="root"
+        expand="block"
+        [routerLink]="link"
+        [queryParams]="linkQueryParams"
+      >
+        <ng-container *ngTemplateOutlet="labels"></ng-container>
+      </ion-col>
+      <ion-col *ngIf="!link" [size]="showTime ? (hasFavorite ? 8 : 10) : hasFavorite ? 10 : 12">
+        <ng-container *ngTemplateOutlet="labels"></ng-container>
+      </ion-col>
+      <ion-col *ngIf="hasFavorite" size="1" offset="1" class="sessions-day__action">
+        <ion-button *ngIf="interventionToShow?.session?.isfavorite" fill="clear" (click)="removeFavorite()">
+          <ion-icon class="sessions-day__action__icon--gold" slot="icon-only" name="heart"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="!interventionToShow?.session?.isfavorite" fill="clear" (click)="addFavorite()">
+          <ion-icon class="sessions-day__action__icon--black" slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" (click)="isOpen = true" *ngIf="interventionToShow?.session">
+          <ion-icon class="sessions-day__action__icon--congress" slot="icon-only" name="calendar-outline"></ion-icon>
+        </ion-button>
+
+        <app-add-to-my-calendar *ngIf="interventionToShow.session" [session]="interventionToShow.session" [isOpen]="isOpen" (closeModal)="isOpen = false"></app-add-to-my-calendar>
+      </ion-col>
+      <ion-col *ngIf="intervention && intervention.abstractId" offset="2" size="10" class="ion-no-padding">
+        <div
+          detail="false"
+          class="sessions-day__content ion-justify-content-end ion-no-padding ion-text-lowercase social-link"
+          routerLink="/app/tabs/abstracts/abstract/{{ intervention.abstractId }}"
+          [queryParams]="linkQueryParams"
+          routerLinkActive="active"
+          [ngStyle]="{
+            'border-left-color': intervention ? undefined : session.color,
+            'border-left': border ? undefined : 'none'
+          }"
+          expand="block"
+        >
+          <app-small-button [iconEnd]="{ name: 'chevron-forward-outline' }" text="{{ 'session-item.see-abstract' | translate }}" color="congressultralight">
+          </app-small-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>

@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-title color="light">{{ 'notes.add_note' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon color="light" name="close-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-padding">
+    <ion-col size="12" class="ion-padding-none">
+      <ion-item lines="none" class="ion-align-items-center custom-border-radius" fill="outline" color="dark" mode="md">
+        <ion-input
+          [(ngModel)]="email"
+          clearInput="true"
+          clearOnEdit="true"
+          inputmode="text"
+          placeholder="{{'login.email' | translate}}"
+          class="ion-text-start"
+          name="password"
+          type="email"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="8" offset="2">
+      <ion-button expand="block" color="congressultralightoutline" (click)="valid()">
+        <ion-label>{{ 'notes.send_button' | translate }}</ion-label>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

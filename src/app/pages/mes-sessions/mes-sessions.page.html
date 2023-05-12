@@ -1,0 +1,71 @@
+<app-main-header colorBtn="light"></app-main-header>
+
+<ion-content id="mes-sessions-page">
+  <ion-grid class="ion-no-padding session-tabs">
+    <!-- <app-session-tabs [actualTab]="'my-programme'"></app-session-tabs> -->
+  </ion-grid>
+
+  <!-- <div class="about-header">
+    <img [src]="templateConfig.logoHeader"/>
+  </div> -->
+
+  <ion-grid class="ion-no-padding bottomSpacesGrid">
+    <div class="ion-padding-horizontal">
+      <app-text-info-html *ngIf="text" [text]="text"></app-text-info-html>
+    </div>
+
+    <ion-row class="grid-no-padding-background ion-padding ion-no-padding-top">
+      <ion-col size="12">
+        <app-card-congress>
+          <ng-container slot="title">
+            <ion-col size="12" class="titleColors ion-no-padding-top">
+              <h2>
+                <ion-icon item-start name="heart" class="my-sessions-icon"></ion-icon>
+                {{ 'tabs.messessions' | translate }}
+              </h2>
+            </ion-col>
+          </ng-container>
+          <ng-container slot="content">
+            <ion-col size="12" class="ion-no-margin">
+              <div *ngIf="!favoritesSessions?.length" class="ion-padding">
+                <ion-list class="ion-no-padding" lines="none">
+                  <ion-item *ngIf="!favoritesSessions?.length">
+                    <ion-label class="ion-text-wrap">
+                      <h2>
+                        {{'home.no-session-currently-my-programme' | translate}}
+                        <ion-icon name="heart" size="small" class="my-sessions-icon"></ion-icon>
+                        {{'home.no-session-currently-my-programme-end' | translate}}
+                      </h2>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+              <ion-list *ngIf="favoritesSessions?.length" class="ion-no-margin ion-no-padding listeInterventions" lines="none">
+                <ng-container *ngFor="let OneSession of favoritesSessions; let indexSessionToShowSessions = index;">
+                  <ion-item
+                    lines="none"
+                    class="dayTitles"
+                    *ngIf="(indexSessionToShowSessions === 0) || (favoritesSessions[indexSessionToShowSessions-1]
+                            && (OneSession.date !== favoritesSessions[indexSessionToShowSessions-1].date))"
+                  >
+                    <ion-icon color="congressultralight" name="calendar-outline"></ion-icon>&nbsp;
+                    <ion-label class="ion-text-wrap titleDayCalendar"> {{getTranslatedDate(OneSession)}} </ion-label>
+                  </ion-item>
+                  <app-session-item-schedule
+                    [session]="OneSession"
+                    link="/app/tabs/programme/session/{{OneSession.idDate}}/{{OneSession.idSession}}"
+                    [linkQueryParams]="{ routeBack: '/app/tabs/mes-sessions' }"
+                    [hasFavoriteStar]="true"
+                    [listFavorites]="favoritesSessions"
+                    [isMySessions]="true"
+                  >
+                  </app-session-item-schedule>
+                </ng-container>
+              </ion-list>
+            </ion-col>
+          </ng-container>
+        </app-card-congress>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,71 @@
+.introduction-page {
+  @import 'swiper/scss';
+  @import 'swiper/scss/pagination';
+  @import 'swiper/scss/navigation';
+  @import 'swiper/scss/virtual';
+  --background: var(--ion-color-congress);
+
+  .close {
+    position: absolute;
+    top: calc(15px + var(--ion-safe-area-top));
+    right: 15px;
+    font-size: 32px;
+    z-index: 999;
+  }
+
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .swiper-pagination {
+    bottom: 0 !important;
+  }
+
+  .swiper-pagination-bullet {
+    background: var(--ion-color-light);
+  }
+
+  .slide {
+    height: calc(100vh - 50px - var(--ion-safe-area-top));
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 300px;
+    text-align: center;
+    color: var(--ion-color-light);
+
+    img {
+      width: calc(100vw - 60px);
+    }
+
+    &.slide1 {
+      img {
+        margin: 30px 0;
+      }
+    }
+
+    .icon-logo {
+      width: 120px;
+      height: 120px;
+    }
+
+    h1 {
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    h2 {
+      font-size: 16px;
+    }
+
+    .cta {
+      // --background: var(--ion-color-congress);
+      margin-top: 20px;
+      // color: var(--ion-color-light);
+    }
+  }
+}

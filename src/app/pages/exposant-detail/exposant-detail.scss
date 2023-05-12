@@ -1,0 +1,184 @@
+/*
+ * Speaker Background
+ */
+
+.linkProducts {
+  text-decoration: underline;
+}
+
+.speaker-background {
+  position: relative;
+
+  display: flex;
+
+  padding-top: var(--ion-safe-area-top);
+
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  height: 120px;
+  width: 120px;
+
+ // background: center / cover url(/assets//speaker-background.png) no-repeat;
+}
+
+.speaker-background img {
+  border-radius: 50%;
+  margin-top: calc(-1 * var(--ion-safe-area-top));
+}
+
+.speaker-background h2 {
+  position: absolute;
+
+  bottom: 10px;
+
+  color: white;
+}
+
+.md .speaker-background {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+}
+
+.ios .speaker-background {
+  box-shadow: 0px 0px 50px 11px #FFFFFF;
+}
+
+/*
+ * Speaker Details
+ */
+
+.speaker-detail p {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.speaker-detail hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  background: var(--ion-color-step-150, #d7d8da);
+}
+
+.about-header {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: auto;
+
+  u {
+    ion-label {
+      font-size: 12px;
+    }
+  }
+}
+
+#speaker-detail {
+  ion-card-content {
+    h2 {
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 20px;
+      color: var(--ion-color-congress);
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    .firstOne {
+      margin-top: 0;
+    }
+  }
+}
+
+#exposant-detail {
+  .exposant-detail__header {
+    display: table;
+    color: var(--ion-color-light);
+    text-align:center;
+
+    &__inner {
+      vertical-align: bottom;
+      display: table-cell;
+      width: 100%;
+
+      &__avatar {
+        overflow: hidden;
+        margin:auto;
+        background-color: #fff;
+        padding: 10px;
+        // border: solid 2px #104461;
+
+        &__img {
+          height: auto;
+          width: auto;
+          max-width: calc(100% - 30px);
+          border-radius: 0;
+          max-height: calc(100% - 30px);
+          background-color: #fff;
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+  .societeName {
+    text-transform: uppercase;
+    margin-top:10px;
+    padding: 0 10px;
+  }
+
+  // .presentation-societe {
+  //   color: var(--ion-color-light);
+  //   font-size: 12px;
+  // }
+
+  app-contact-detail {
+    --ion-background-color: transparent;
+  }
+
+  .exposant-detail__font-bold { font-weight: bold; }
+  .exposant-detail__white-space { white-space: normal }
+
+  .tittle-days{
+    color: var(--ion-color-congress-ultralight);
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+}
+
+h3 {
+  font-weight: 600;
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.no-text-underline {
+  text-decoration: none;
+}
+
+.not-found {
+  color: #000000;
+  font-size: 16px;
+}
+
+.note-value {
+  color: #000000;
+  font-size: 14px;
+}

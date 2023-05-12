@@ -1,0 +1,183 @@
+#schedule-page {
+  .session-tabs {
+    margin-top: 60px;
+  }
+
+  ion-card-content {
+    min-height: 64px;
+    padding: 10px 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    ion-label {
+      color: #fff;
+    }
+  }
+
+  .about-header {
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    .about-image {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      opacity: 0;
+
+      transition: opacity 500ms ease-in-out;
+    }
+
+    ion-segment {
+      &-button.segment-button-checked::part(native) {
+        color: var(--ion-color-congress);
+        font-weight: bold;
+      }
+      &-button::part(indicator-background) {
+        background: var(--ion-color-congress-bis);
+      }
+    }
+
+    .toolbar-wrapper {
+      margin-top: 20px;
+    }
+    .toolbar {
+      --background: transparent;
+
+      &__tabs {
+        // background:rgba(255,255,255,0.8);
+        background: var(--ion-color-light);
+        color: var(--ion-color-dark);
+      }
+
+      &__search {
+        padding-left: 0;
+        --background: rgb(233, 233, 235, 0.8);
+        // --box-shadow: 0px 0px 0px 1px rgba(var(--ion-color-congress-bis-rgb), 1);
+      }
+    }
+  }
+
+  ion-chip {
+    background: #fff;
+  }
+}
+
+#schedule-page.ios {
+  .about-header {
+    //height: 510px !important;
+  }
+}
+
+ion-fab-button {
+  --background: var(--ion-color-step-150, #fff);
+  --background-hover: var(--ion-color-step-200, #f2f2f2);
+  --background-focused: var(--ion-color-step-250, #d9d9d9);
+
+  --color: var(--ion-color-primary, #3880ff);
+}
+
+#toolbarHeader {
+  ion-button,
+  ion-back-button,
+  ion-menu-button {
+    --color: black;
+  }
+}
+
+.ios .about-info {
+  --ion-padding: 19px;
+}
+
+.ios .about-info h3 {
+  font-weight: 700;
+}
+
+/*
+ * Material Design uses the ripple for activated
+ * so only style the iOS activated background
+ */
+.ios ion-fab-button {
+  --background-activated: var(--ion-color-step-250, #d9d9d9);
+}
+
+$categories: (
+  // ionic: var(--ion-color-primary),
+  // atelier: #ac282b,
+  // séance plénière: #8e8d93,
+  // symposium: #fe4c52,
+  // table ronde: #fd8b2d,
+  // séance officielle: #fed035,
+  // atelier sponsorisé: #69bb7b,
+  // atelier interactif: #3bc7c4,
+  // pause / déjeuner: #b16be3,
+  // navigation: #6600cc,
+);
+
+@each $track, $value in map-remove($categories) {
+  ion-item-sliding[track='#{$track}'] ion-label {
+    border-left: 5px solid $value;
+    padding-left: 10px;
+  }
+}
+
+.about-header .about-image {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+
+  transition: opacity 500ms ease-in-out;
+}
+
+.md {
+  #searchToolbarSchedule ion-row {
+    padding-top: 0;
+    align-items: center;
+  }
+
+  ion-list {
+    padding: 0;
+  }
+}
+
+.infinite {
+  height: 1px;
+}
+
+.filters-buttons {
+  ion-select {
+    background: #fff;
+
+    &::part(icon) {
+      width: 24px;
+    }
+
+    &.topics::part(icon) {
+      content: url('/assets/icon/icon_themes-topics.svg');
+    }
+    &.tracks::part(icon) {
+      content: url('/assets/icon/icon_type.svg');
+    }
+    &.focuses::part(icon) {
+      content: url('/assets/icon/icon_focus.svg');
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<app-return-header
+  colorBg="congress"
+  colorBtn="light"
+  [defaultHref]="(defaultHref !== '') ? defaultHref : '/app/tabs/exposants'"
+  [positionAbsolute]="false"
+  colorTitle="light"
+  text="{{ 'global.back' | translate }}"
+>
+</app-return-header>
+
+<ion-content id="interactive-page">
+  <div class="leaflet-controls-custom">
+    <div class="leaflet-controls-custom__control">
+      <ion-button class="ion-no-margin" expand="full" color="congressultralight" (click)="handleClickZoom(-1)" [disabled]="isDisabledZoomOut">
+        <ion-icon name="remove-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="ion-no-margin" expand="full" color="congressultralight" (click)="handleClickZoom(1)" [disabled]="isDisabledZoomIn">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div *ngIf="objectKeys(data).length > 1" class="leaflet-controls-custom__control">
+      <ion-label color="light" class="ion-padding-horizontal">{{ 'interactive-map.level' | translate }} : {{ level }}</ion-label>
+      <ion-button class="ion-no-margin" expand="full" color="congressultralight" (click)="handleLevel(-1)" [disabled]="isDisabledLevelOut">
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="ion-no-margin" expand="full" color="congressultralight" (click)="handleLevel(1)" [disabled]="isDisabledLevelIn">
+        <ion-icon name="chevron-up-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <div id="map-global"></div>
+
+  <!-- <div class="searchbar"> -->
+    <!-- <ion-button color="congress" (click)="showFind()">
+      <ion-icon name="search-outline" slot="start"></ion-icon>
+      <ion-label>{{ 'interactive-map.find' | translate }}</ion-label>
+    </ion-button> -->
+
+    <!-- <ion-button color="congress" (click)="showWhereAmI()">
+        <ion-icon name="location-outline" slot="start"></ion-icon>
+        <ion-label>{{'interactive-map.where-am-i' | translate}}</ion-label>
+      </ion-button> -->
+  <!-- </div> -->
+</ion-content>
