@@ -1,0 +1,309 @@
+{
+  "api": {
+    "name": "PhotoViewerPlugin",
+    "slug": "photoviewerplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "echo",
+        "signature": "(options: capEchoOptions) => Promise<capEchoResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": ": capEchoOptions",
+            "type": "capEchoOptions"
+          }
+        ],
+        "returns": "Promise<capEchoResult>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "options : capEchoOptions"
+          },
+          {
+            "name": "return",
+            "text": "Promise<capEchoResult>"
+          },
+          {
+            "name": "since",
+            "text": "0.0.1"
+          }
+        ],
+        "docs": "Echo a given string",
+        "complexTypes": [
+          "capEchoResult",
+          "capEchoOptions"
+        ],
+        "slug": "echo"
+      },
+      {
+        "name": "show",
+        "signature": "(options: capShowOptions) => Promise<capShowResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "capShowOptions"
+          }
+        ],
+        "returns": "Promise<capShowResult>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "options"
+          }
+        ],
+        "docs": "Show the PhotoViewer",
+        "complexTypes": [
+          "capShowResult",
+          "capShowOptions"
+        ],
+        "slug": "show"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "capEchoResult",
+      "slug": "capechoresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "value",
+          "tags": [],
+          "docs": "String returned",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "capEchoOptions",
+      "slug": "capechooptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "value",
+          "tags": [],
+          "docs": "String to be echoed",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "capShowResult",
+      "slug": "capshowresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "result",
+          "tags": [],
+          "docs": "result set to true when successful else false",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "message",
+          "tags": [],
+          "docs": "a returned message",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "imageIndex",
+          "tags": [],
+          "docs": "Result Image index at closing returned",
+          "complexTypes": [],
+          "type": "number | undefined"
+        }
+      ]
+    },
+    {
+      "name": "capShowOptions",
+      "slug": "capshowoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "images",
+          "tags": [],
+          "docs": "List of image",
+          "complexTypes": [
+            "Image"
+          ],
+          "type": "Image[]"
+        },
+        {
+          "name": "options",
+          "tags": [],
+          "docs": "Viewer options (optional)",
+          "complexTypes": [
+            "ViewerOptions"
+          ],
+          "type": "ViewerOptions"
+        },
+        {
+          "name": "mode",
+          "tags": [],
+          "docs": "Viewer mode (\"gallery\",\"slider\",\"one\")",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "startFrom",
+          "tags": [],
+          "docs": "Viewer image index to start from for mode (\"slider\",\"one\")",
+          "complexTypes": [],
+          "type": "number | undefined"
+        }
+      ]
+    },
+    {
+      "name": "Image",
+      "slug": "image",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "url",
+          "tags": [],
+          "docs": "image url",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "tags": [],
+          "docs": "image title optional",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "ViewerOptions",
+      "slug": "vieweroptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "share",
+          "tags": [],
+          "docs": "display the share button (default true)",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "title",
+          "tags": [],
+          "docs": "display the image title if any (default true)",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "transformer",
+          "tags": [],
+          "docs": "transformer Android \"zoom\", \"depth\" or \"none\" (default \"zoom\")",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "spancount",
+          "tags": [],
+          "docs": "Grid span count (default 3)",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "maxzoomscale",
+          "tags": [],
+          "docs": "Max Zoom Scale (default 3)",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "compressionquality",
+          "tags": [],
+          "docs": "Compression Quality for Sharing Image range [0-1] (default 0.8)",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "backgroundcolor",
+          "tags": [],
+          "docs": "Background Color\n[\"white\", \"ivory\", \"lightgrey\", \"darkgrey\", \"grey\", \"dimgrey\", \"black\"]\n(default \"black\")",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "divid",
+          "tags": [],
+          "docs": "Div HTML Element Id (Web only) (default 'photoviewer-container')",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "movieoptions",
+          "tags": [],
+          "docs": "Movie Options iOS only",
+          "complexTypes": [
+            "MovieOptions"
+          ],
+          "type": "MovieOptions"
+        }
+      ]
+    },
+    {
+      "name": "MovieOptions",
+      "slug": "movieoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "name",
+          "tags": [],
+          "docs": "Movie Name (default \"myMovie\") iOS only",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "imagetime",
+          "tags": [],
+          "docs": "Image Time Duration in Seconds (default 3) iOS only",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "mode",
+          "tags": [],
+          "docs": "Movie Mode \"portrait\" / \"landscape\" (default \"landscape\") iOS only",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "ratio",
+          "tags": [],
+          "docs": "Movie Ratio \"4/3\" / \"16/9\" (default \"16/9\") iOS only",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [],
+  "pluginConfigs": []
+}
